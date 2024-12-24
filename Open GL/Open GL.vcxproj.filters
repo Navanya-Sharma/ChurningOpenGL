@@ -8,8 +8,8 @@
     <Filter Include="Res">
       <UniqueIdentifier>{d13e9058-3f30-497a-a630-245a9fd589fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Res\Shaders">
-      <UniqueIdentifier>{64ed0457-0bf2-455d-8db4-0eb6ee4b8e95}</UniqueIdentifier>
+    <Filter Include="HeaderFiles">
+      <UniqueIdentifier>{452a912a-131c-46e5-a425-fabebb193da3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -19,13 +19,63 @@
     <ClCompile Include="RainbowSqaure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\Softwares\Clibs\glad\src\glad.c">
+      <Filter>HeaderFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="res\stb_image.cpp">
+      <Filter>Res</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferLayout.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexArray.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="res\stb_image.h">
+      <Filter>Res</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="res\Basic.shader">
-      <Filter>Res\Shaders</Filter>
+      <Filter>Res</Filter>
     </None>
   </ItemGroup>
 </Project>
