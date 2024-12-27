@@ -4,6 +4,14 @@ C:\Users\sharm\source\repos\Open GL\Git\Open GL\IndexBuffer.cpp;C:\Users\sharm\s
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\MyTry.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\MyTry.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\RainbowSqaure.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\RainbowSqaure.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\Renderer.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Renderer.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\glm\detail\glm.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\glm.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\IMGui\imgui.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\imgui.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\IMGui\imgui_demo.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\imgui_demo.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\IMGui\imgui_draw.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\imgui_draw.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\IMGui\imgui_impl_glfw.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\imgui_impl_glfw.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\IMGui\imgui_impl_opengl3.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\imgui_impl_opengl3.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\IMGui\imgui_tables.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\imgui_tables.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\IMGui\imgui_widgets.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\imgui_widgets.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\stb_image.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\stb_image.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\Shader.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Shader.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\Texture.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Texture.obj

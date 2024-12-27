@@ -26,10 +26,26 @@ bool GLLogCall(const char* function, const char* file, int line) {
 	return true;
 }
 
+void Renderer::EnableBlending()
+{
+	GLCall(glEnable(GL_BLEND));
+	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+}
+
 void Renderer::Draw(VertexArray& va, IndexBuffer& ib, Shader& sh) const
 {
 	va.Bind();
 	ib.Bind();
 	sh.Bind();
 	GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
+}
+
+void Renderer::Clear()
+{
+	GLCall(glClear(GL_COLOR_BUFFER_BIT));
+}
+
+void Renderer::SetClearColor(float r, float b, float g, float a)
+{
+	GLCall(glClearColor(r,g,b,a));
 }

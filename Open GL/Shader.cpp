@@ -7,6 +7,7 @@
 
 #include "Renderer.h"
 
+
 Shader::Shader(const std::string& path)
 {
 	ShaderProgramSource src = ParseShader(path);
@@ -31,14 +32,17 @@ void Shader::Unbind() const
 
 void Shader::SetUniform1i(const std::string& name, int i1)
 {
-	unsigned int location = GetUniformLocation(name);
-	GLCall(glUniform1i(location, i1));
+	GLCall(glUniform1i(GetUniformLocation(name), i1));
 }
 
 void Shader::SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
 {
-	unsigned int location = GetUniformLocation(name);
-	GLCall(glUniform4f(location, v0, v1, v2, v3));
+	GLCall(glUniform4f(GetUniformLocation(name), v0, v1, v2, v3));
+}
+
+void Shader::SetUniformMat4(const std::string& name, glm::mat4 mat)
+{
+	GLCall(glUniformMatrix4fv(GetUniformLocation(name),1,GL_FALSE,&mat[0][0]));
 }
 
 int Shader::GetUniformLocation(const std::string& name)

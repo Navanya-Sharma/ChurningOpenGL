@@ -15,6 +15,9 @@ bool GLLogCall(const char* function, const char* file, int line);
 
 class Renderer {
 	public:
+		void EnableBlending();
 		void Draw(VertexArray& va, IndexBuffer& ib, Shader& sh) const;
+		void Clear();
+		void SetClearColor(float r, float b, float g, float a);
 };
 
