@@ -15,9 +15,12 @@ public:
 
 	void Bind(unsigned int slot = 0) const;
 	void Unbind();
+	void Write(float* values);
 
 	inline int GetWidth() const { return m_Width; }
 	inline int GetHeight() const { return m_Height; }
-	 
+	
+	inline void SetWidth(int w) { m_Width=w; }
+	inline void SetHeight(int h) { m_Height=h; }
 };
 

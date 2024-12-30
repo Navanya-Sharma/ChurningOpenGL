@@ -11,7 +11,7 @@
 Shader::Shader(const std::string& path)
 {
 	ShaderProgramSource src = ParseShader(path);
-	m_RendererID = CreateShader(src.VertexSource, src.FragmentSource);
+	m_RendererID = CreateShader(src.VertexSource, src.FragmentSource, src.CompSource);
 	n_FilePath = path;
 }
 Shader::~Shader()
@@ -62,11 +62,11 @@ ShaderProgramSource Shader::ParseShader(const std::string& path) {
 	std::ifstream stream(path);
 
 	enum class Shadertype {
-		NONE = -1, VERTEX = 0, FRAGMENT = 1
+		NONE = -1, VERTEX = 0, FRAGMENT = 1, COMPUTE =2
 	};
 
 	std::string line;
-	std::string ans[2] = { "","" };
+	std::string ans[3] = { "","",""};
 	Shadertype type = Shadertype::NONE;
 
 	while (getline(stream, line, '\r')) {
@@ -75,12 +75,14 @@ ShaderProgramSource Shader::ParseShader(const std::string& path) {
 				type = Shadertype::FRAGMENT;
 			else if (line.find("vertex") != std::string::npos)
 				type = Shadertype::VERTEX;
+			else if (line.find("compute") != std::string::npos)
+				type = Shadertype::COMPUTE;
 		}
 		else {
 			ans[(int)type] += line + '\n';
 		}
 	}
-	return { ans[0],ans[1] };
+	return { ans[0],ans[1],ans[2]};
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source) {
@@ -96,8 +98,14 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
 		char* message = (char*)alloca(length * sizeof(char));
 		glGetShaderInfoLog(id, length, &length, message);
-
-		printf("%s Shader did not compile\n", (type == GL_VERTEX_SHADER ? "Vertex" : "Fragment"));
+		std::string sh;
+		if (type == GL_VERTEX_SHADER)
+			sh = "Vertex";
+		else if (type == GL_FRAGMENT_SHADER)
+			sh = "Fragment";
+		else
+			sh = "Compute";
+		std::cout<<sh+" Shader did not compile"<<std::endl;
 		printf("%s", message);
 
 		glDeleteShader(id);
@@ -107,10 +115,16 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 	return id;
 }
 
-unsigned int Shader::CreateShader(const std::string& verShade, const std::string& fragShade) {
+unsigned int Shader::CreateShader(const std::string& verShade, const std::string& fragShade, 
+	const std::string& CompShade) {
 	unsigned int pro = glCreateProgram();
 	unsigned int vs = CompileShader(GL_VERTEX_SHADER, verShade);
 	unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragShade);
+	unsigned int cs;
+	if (CompShade != "") {
+		cs = CompileShader(GL_COMPUTE_SHADER, CompShade);
+		glAttachShader(pro, cs);
+	}
 
 	glAttachShader(pro, vs);
 	glAttachShader(pro, fs);
@@ -119,6 +133,7 @@ unsigned int Shader::CreateShader(const std::string& verShade, const std::string
 
 	glDeleteShader(vs);
 	glDeleteShader(fs);
+	if (CompShade != "") glDeleteShader(cs);
 
 	//glDetachShader(pro, vs);
 	//glDetachShader(pro,fs);

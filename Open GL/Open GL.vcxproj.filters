@@ -1427,6 +1427,9 @@
     <None Include="res\glm\detail\type_vec4_simd.inl">
       <Filter>Res\glm\details</Filter>
     </None>
+    <None Include="res\Compute.shader">
+      <Filter>Res</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\glm\CMakeLists.txt">

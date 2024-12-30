@@ -73,8 +73,8 @@ static float* ortho(float x1, float x2, float y1, float y2, float z1, float z2) 
 int main() {
 	glfwInit();
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	GLFWwindow* win = NULL;
@@ -94,10 +94,10 @@ int main() {
 	}
 {
 	float vert[] = {
-			-50.0f,-50.0f, 0.0f, 0.0f,
-			50.0f,-50.0f, 1.0f, 0.0f,
-			50.0f,50.0f, 1.0f, 1.0f,
-			-50.0f,50.0f,0.0f,1.0
+			50.0f,50.0f, 0.0f, 0.0f,
+			650.0f,50.0f, 1.0f, 0.0f,
+			650.0f, 650.0f, 1.0f, 1.0f,
+			50.0f, 650.0f,0.0f,1.0
 	};
 	unsigned int ind[6] = {
 		0,1,2,
@@ -140,14 +140,47 @@ int main() {
 	//std::cout << mvp << std::endl;
 
 	Shader shh("res/Basic.shader");
-	shh.Bind();
-	//shh.SetUniform4f("n_color", red, green, blue, 1.0f);
+	
+	Shader CompShader("res/Compute.shader");
 
+	Texture TextComp("");
+	TextComp.Bind();
+	CompShader.Bind();
+	
+	float x[20] 	= { 0.5f,1.f, 0.5f, 1.f, 0.5f, 1.f, 0.5f, 0.5f, 0.5f,
+	0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f,0.5f };
+	TextComp.Write(x);
+
+	std::vector<float> xn(20);
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_RG, GL_FLOAT, xn.data());
+	for (auto d : xn) {
+		std::cout << d << "x ";
+	}
+	std::cout << std::endl;
+
+	glDispatchCompute(10, 1, 1);
+	glMemoryBarrier(GL_ALL_BARRIER_BITS);
+
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_RG, GL_FLOAT, xn.data());
+	for (auto d : xn) {
+			std::cout << d << "x ";
+		}
+	
+
+
+
+
+
+	//shh.SetUniform4f("n_color", red, green, blue, 1.0f);
+	shh.Bind();
 
 
 	Texture image("res/nav.png");
 	image.Bind();
 	shh.SetUniform1i("u_Texture", 0);
+
+
+	
 
 	va.Unbind();
 	veboj.Unbind();
@@ -173,12 +206,19 @@ int main() {
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-	glm::vec3 transA(200, 200, 0);
+	glm::vec3 transA(0, 0, 0);
 	glm::vec3 transB(400, 200, 0);
 
 
 	while (!glfwWindowShouldClose(win))
 	{
+		
+
+		//CompShader.Bind();
+		TextComp.Bind();
+		
+
+		//image.Bind();
 		gRenderer.SetClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
 		gRenderer.Clear();
 		gRenderer.Draw(va, inbu, shh);
@@ -228,13 +268,13 @@ int main() {
 		glm::mat4 mvp = proj * veiw * model;
 		shh.SetUniformMat4("u_MVP", mvp);
 		}
-		{
+		/*{
 			gRenderer.Draw(va, inbu, shh);
 
 			glm::mat4 model = glm::translate(glm::mat4(1.0f), transB);
 			glm::mat4 mvp = proj * veiw * model;
 			shh.SetUniformMat4("u_MVP", mvp);
-		}
+		}*/
 
 		glfwSwapBuffers(win);
 		glfwPollEvents();

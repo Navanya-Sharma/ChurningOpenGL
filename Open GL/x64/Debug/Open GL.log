@@ -1,12 +1,2 @@
-﻿  BufferLayout.cpp
-  IndexBuffer.cpp
-  MyTry.cpp
-  Renderer.cpp
-  Shader.cpp
-  Texture.cpp
-  VertexArray.cpp
-C:\Users\sharm\source\repos\Open GL\Git\Open GL\VertexArray.cpp(26,3): warning C4312: 'type cast': conversion from 'unsigned int' to 'const void *' of greater size
-  VertexBuffer.cpp
-  Generating Code...
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+﻿  Texture.cpp
   Open GL.vcxproj -> C:\Users\sharm\source\repos\Open GL\Git\x64\Debug\Open GL.exe
