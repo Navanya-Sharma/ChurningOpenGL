@@ -94,14 +94,16 @@ int main() {
 	}
 {
 	float vert[] = {
-			50.0f,50.0f, 0.0f, 0.0f,
-			650.0f,50.0f, 1.0f, 0.0f,
-			650.0f, 650.0f, 1.0f, 1.0f,
-			50.0f, 650.0f,0.0f,1.0
+			-0.8f,-0.8f, 0.0f, 0.0f,
+			0.8f,-0.8f, 1.0f, 0.0f,
+			//0.8f,0.8f, 1.0f, 1.0f,
+
+			0.0f,0.8f, 1.0f, 1.0f,
+			//-0.8f, 0.8f,0.0f,1.0
 	};
 	unsigned int ind[6] = {
 		0,1,2,
-		0,2,3
+		//0,2,3
 	};
 
 
@@ -116,7 +118,7 @@ int main() {
 	IndexBuffer inbu(ind, 6);
 
 	//glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
-	glm::mat4 proj = glm::ortho(0.0f, 800.0f, 0.0f, 800.0f, -1.0f, 1.0f);
+	glm::mat4 proj = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
 
 	//float* proj2 = ortho(0.0f, 800.0f, 0.0f, 800.0f, -1.0f, 1.0f);
 	/*0.0025	0	 0	 -1
@@ -147,31 +149,37 @@ int main() {
 	TextComp.Bind();
 	CompShader.Bind();
 	
-	float x[20] 	= { 0.5f,1.f, 0.5f, 1.f, 0.5f, 1.f, 0.5f, 0.5f, 0.5f,
-	0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f,0.5f };
+	srand(time(0));
+	float x[200];
+	int i = 0;
+	for (int i = 0; i < 200; i++)
+	{
+		float randA = (float)rand() / (float)RAND_MAX;
+		float randB = ((float)rand() / (float)RAND_MAX) * (1 - randA);
+
+		x[i++] = randA * vert[0] + randB * vert[4] + (1 - randA - randB) * vert[8];
+		x[i] = randA * vert[1] + randB * vert[5] + (1 - randA - randB) * vert[9];
+	}
+
 	TextComp.Write(x);
 
-	std::vector<float> xn(20);
+	std::vector<float> xn(200);
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RG, GL_FLOAT, xn.data());
-	for (auto d : xn) {
+	/*for (auto d : xn) {
 		std::cout << d << "x ";
-	}
+	}*/
 	std::cout << std::endl;
 
-	glDispatchCompute(10, 1, 1);
+	glDispatchCompute(100, 1, 1);
 	glMemoryBarrier(GL_ALL_BARRIER_BITS);
 
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RG, GL_FLOAT, xn.data());
-	for (auto d : xn) {
-			std::cout << d << "x ";
-		}
+	/*for (auto d : xn) {
+			std::cout << d << "New x ";
+		}*/
 	
 
 
-
-
-
-	//shh.SetUniform4f("n_color", red, green, blue, 1.0f);
 	shh.Bind();
 
 
@@ -223,6 +231,7 @@ int main() {
 		gRenderer.Clear();
 		gRenderer.Draw(va, inbu, shh);
 
+
 		// Start the Dear ImGui frame
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
@@ -268,7 +277,7 @@ int main() {
 		glm::mat4 mvp = proj * veiw * model;
 		shh.SetUniformMat4("u_MVP", mvp);
 		}
-		/*{
+		/* {
 			gRenderer.Draw(va, inbu, shh);
 
 			glm::mat4 model = glm::translate(glm::mat4(1.0f), transB);
