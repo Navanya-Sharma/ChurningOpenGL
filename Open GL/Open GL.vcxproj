@@ -461,6 +461,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Basic.shader" />
+    <None Include="res\Basic2.shader" />
     <None Include="res\Compute.shader" />
     <None Include="res\glm\detail\func_common.inl" />
     <None Include="res\glm\detail\func_common_simd.inl" />

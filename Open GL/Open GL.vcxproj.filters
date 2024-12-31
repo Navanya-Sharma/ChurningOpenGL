@@ -1430,6 +1430,9 @@
     <None Include="res\Compute.shader">
       <Filter>Res</Filter>
     </None>
+    <None Include="res\Basic2.shader">
+      <Filter>Res</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\glm\CMakeLists.txt">

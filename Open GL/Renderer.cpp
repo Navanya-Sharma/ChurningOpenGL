@@ -32,8 +32,14 @@ void Renderer::EnableBlending()
 	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 }
 
-void Renderer::Draw(VertexArray& va, IndexBuffer& ib, Shader& sh) const
+void Renderer::Draw(VertexArray& va, IndexBuffer& ib, Shader& sh, GLenum Type) const
 {
+	if (Type != NULL) {
+		va.Bind();
+		sh.Bind();
+		GLCall(glDrawArrays(GL_POINTS, 0, 100));
+		return;
+	}
 	va.Bind();
 	ib.Bind();
 	sh.Bind();

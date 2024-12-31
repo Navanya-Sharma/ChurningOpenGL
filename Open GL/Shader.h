@@ -20,6 +20,7 @@ public:
 	Shader(const std::string& path);
 	~Shader();
 
+	inline unsigned int get() const { return m_RendererID; };
 	void Bind() const;
 	void Unbind() const;
 	void SetUniform1i(const std::string& name, int i1);

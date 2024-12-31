@@ -150,9 +150,9 @@ int main() {
 	CompShader.Bind();
 	
 	srand(time(0));
-	float x[200];
+	float x[20000];
 	int i = 0;
-	for (int i = 0; i < 200; i++)
+	for (int i = 0; i < 20000; i++)
 	{
 		float randA = (float)rand() / (float)RAND_MAX;
 		float randB = ((float)rand() / (float)RAND_MAX) * (1 - randA);
@@ -163,32 +163,52 @@ int main() {
 
 	TextComp.Write(x);
 
-	std::vector<float> xn(200);
-	glGetTexImage(GL_TEXTURE_2D, 0, GL_RG, GL_FLOAT, xn.data());
+	float xn[20000*10];
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_RG, GL_FLOAT, xn);
 	/*for (auto d : xn) {
 		std::cout << d << "x ";
 	}*/
 	std::cout << std::endl;
-
-	glDispatchCompute(100, 1, 1);
+	glDispatchCompute(10000, 1, 1);
 	glMemoryBarrier(GL_ALL_BARRIER_BITS);
 
-	glGetTexImage(GL_TEXTURE_2D, 0, GL_RG, GL_FLOAT, xn.data());
+	for (int i = 0;i < 20000 * 10;i += 20000) {
+		glDispatchCompute(10000, 1, 1);
+		glMemoryBarrier(GL_ALL_BARRIER_BITS);
+		glGetTexImage(GL_TEXTURE_2D, 0, GL_RG, GL_FLOAT, xn+i);
+		
+	}
 	/*for (auto d : xn) {
 			std::cout << d << "New x ";
 		}*/
 	
+	/*VertexArray ArrPoints;
+	VertexBuffer BuffPoints(xn, 2 * 100 * sizeof(float));
 
+	BufferLayout layPoints;
+	layPoints.Push<float>(2);
+	ArrPoints.AddBuffer(BuffPoints, layPoints);*/
+	//VertexArray ArrPoints;ArrPoints.Bind();
+	unsigned int vaob;
+	GLCall(glGenVertexArrays(1, &vaob));
+	GLCall(glBindVertexArray(vaob));
+
+	unsigned int b;
+	GLCall(glGenBuffers(1, &b));
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, b));
+	GLCall(glBufferData(GL_ARRAY_BUFFER, 2 * 10000*10 * sizeof(float), xn, GL_DYNAMIC_DRAW));
+
+	GLCall(glEnableVertexAttribArray(0));
+	GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0));
+
+	Shader shPoints("res/Basic2.shader");
+	unsigned int shaderb = shPoints.get();
 
 	shh.Bind();
-
 
 	Texture image("res/nav.png");
 	image.Bind();
 	shh.SetUniform1i("u_Texture", 0);
-
-
-	
 
 	va.Unbind();
 	veboj.Unbind();
@@ -229,9 +249,15 @@ int main() {
 		//image.Bind();
 		gRenderer.SetClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
 		gRenderer.Clear();
+		//gRenderer.Draw(va, inbu, shh);
 		gRenderer.Draw(va, inbu, shh);
 
-
+		GLCall(glUseProgram(shaderb));
+		GLCall(glBindVertexArray(vaob));
+		GLCall(glBindBuffer(GL_ARRAY_BUFFER, b));
+		GLCall(glDrawArrays(GL_POINTS, 0, 10000*10));
+		
+		//gRenderer.Draw(ArrPoints, inbu, shPoints,GL_POINTS);
 		// Start the Dear ImGui frame
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
@@ -269,7 +295,7 @@ int main() {
 			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(backup_current_context);
 		}
-
+		shh.Bind();
 		updateColors();
 		{
 			

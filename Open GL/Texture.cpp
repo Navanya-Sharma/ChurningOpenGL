@@ -16,7 +16,7 @@ Texture::Texture(const std::string& path)
 	GLCall(glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T , GL_CLAMP_TO_EDGE));
 
 	if (path == "") {
-		m_Width = 100;
+		m_Width = 10000;
 		m_Height = 1;
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_R32F, m_Width, m_Height, 0, GL_RED, GL_FLOAT, NULL);
 		glBindImageTexture(0, m_RendererID, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RG32F);
