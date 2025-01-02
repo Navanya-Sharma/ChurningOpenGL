@@ -1,3 +1,4 @@
-﻿  MyTry.cpp
-C:\Users\sharm\source\repos\Open GL\Git\Open GL\MyTry.cpp(152,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  RainbowSquare.cpp
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\RainbowSquare.cpp(78,2): warning C4156: deletion of an array expression without using the array form of 'delete'; array form substituted
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\RainbowSquare.cpp(78,2): warning C4154: deletion of an array expression; conversion to pointer supplied
   Open GL.vcxproj -> C:\Users\sharm\source\repos\Open GL\Git\x64\Debug\Open GL.exe

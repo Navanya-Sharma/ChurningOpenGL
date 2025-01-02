@@ -18,6 +18,6 @@ class Renderer {
 		void EnableBlending();
 		void Draw(VertexArray& va, IndexBuffer& ib, Shader& sh, GLenum Type=NULL) const;
 		void Clear();
-		void SetClearColor(float r, float b, float g, float a);
+		void SetClearColor(float* color);
 };
 

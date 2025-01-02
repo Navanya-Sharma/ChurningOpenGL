@@ -8,9 +8,6 @@
     <Filter Include="Res">
       <UniqueIdentifier>{d13e9058-3f30-497a-a630-245a9fd589fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HeaderFiles">
-      <UniqueIdentifier>{452a912a-131c-46e5-a425-fabebb193da3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Res\glm">
       <UniqueIdentifier>{23a3af1d-4f86-4003-8d40-208c4bed375e}</UniqueIdentifier>
     </Filter>
@@ -32,19 +29,22 @@
     <Filter Include="Res\ImGui">
       <UniqueIdentifier>{f74f8549-cc9d-4a06-92d4-4d00f13aa458}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{452a912a-131c-46e5-a425-fabebb193da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{152c1e98-d8d0-4938-9f97-f6bc3a976e1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MyTry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RainbowSqaure.cpp">
+    <ClCompile Include="RainbowSqaure old.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\Softwares\Clibs\glad\src\glad.c">
-      <Filter>HeaderFiles</Filter>
+      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files</Filter>
@@ -91,31 +91,46 @@
     <ClCompile Include="res\IMGui\imgui_widgets.cpp">
       <Filter>Res\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="RainbowSquare.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChaosGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelViewProjection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
-      <Filter>HeaderFiles</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>HeaderFiles</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IndexBuffer.h">
-      <Filter>HeaderFiles</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BufferLayout.h">
-      <Filter>HeaderFiles</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VertexArray.h">
-      <Filter>HeaderFiles</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>HeaderFiles</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="res\stb_image.h">
       <Filter>Res</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>HeaderFiles</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="res\glm\common.hpp">
       <Filter>Res\glm</Filter>
@@ -1008,11 +1023,23 @@
     <ClInclude Include="res\IMGui\imstb_truetype.h">
       <Filter>Res\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RainbowSquare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChaosGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelViewProjection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\Basic.shader">
-      <Filter>Res</Filter>
-    </None>
     <None Include="res\glm\ext\matrix_clip_space.inl">
       <Filter>Res\glm\ext</Filter>
     </None>
@@ -1427,11 +1454,17 @@
     <None Include="res\glm\detail\type_vec4_simd.inl">
       <Filter>Res\glm\details</Filter>
     </None>
-    <None Include="res\Compute.shader">
-      <Filter>Res</Filter>
+    <None Include="res\Basic.shader">
+      <Filter>Shaders</Filter>
     </None>
     <None Include="res\Basic2.shader">
-      <Filter>Res</Filter>
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\Compute.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\Rainbow.shader">
+      <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

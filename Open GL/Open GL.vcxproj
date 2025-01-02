@@ -134,9 +134,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\Softwares\Clibs\glad\src\glad.c" />
     <ClCompile Include="BufferLayout.cpp" />
+    <ClCompile Include="ChaosGame.cpp" />
+    <ClCompile Include="core.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
-    <ClCompile Include="MyTry.cpp" />
-    <ClCompile Include="RainbowSqaure.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModelViewProjection.cpp" />
+    <ClCompile Include="RainbowSqaure old.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="res\glm\detail\glm.cpp" />
     <ClCompile Include="res\IMGui\imgui.cpp" />
@@ -147,6 +150,7 @@
     <ClCompile Include="res\IMGui\imgui_tables.cpp" />
     <ClCompile Include="res\IMGui\imgui_widgets.cpp" />
     <ClCompile Include="res\stb_image.cpp" />
+    <ClCompile Include="RainbowSquare.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VertexArray.cpp" />
@@ -154,7 +158,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BufferLayout.h" />
+    <ClInclude Include="ChaosGame.h" />
+    <ClInclude Include="core.h" />
     <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="ModelViewProjection.h" />
+    <ClInclude Include="RainbowSquare.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="res\glm\common.hpp" />
     <ClInclude Include="res\glm\detail\compute_common.hpp" />
@@ -454,6 +462,7 @@
     <ClInclude Include="res\IMGui\imstb_textedit.h" />
     <ClInclude Include="res\IMGui\imstb_truetype.h" />
     <ClInclude Include="res\stb_image.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VertexArray.h" />
@@ -601,6 +610,7 @@
     <None Include="res\glm\gtx\vector_angle.inl" />
     <None Include="res\glm\gtx\vector_query.inl" />
     <None Include="res\glm\gtx\wrap.inl" />
+    <None Include="res\Rainbow.shader" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\glm\CMakeLists.txt" />

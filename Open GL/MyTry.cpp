@@ -10,6 +10,9 @@
 #include "Shader.h"
 #include "Texture.h"
 
+#include "Scene.h"
+#include "Rainbow Square.h"
+
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -105,7 +108,6 @@ int main() {
 		0,1,2,
 		//0,2,3
 	};
-
 
 	VertexArray va;
 	VertexBuffer veboj(vert, 4*4 * sizeof(float));
@@ -240,24 +242,18 @@ int main() {
 
 	while (!glfwWindowShouldClose(win))
 	{
-		
-
-		//CompShader.Bind();
-		TextComp.Bind();
-		
-
-		//image.Bind();
 		gRenderer.SetClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
 		gRenderer.Clear();
-		//gRenderer.Draw(va, inbu, shh);
+
+		/*TextComp.Bind();
+		
 		gRenderer.Draw(va, inbu, shh);
 
 		GLCall(glUseProgram(shaderb));
 		GLCall(glBindVertexArray(vaob));
 		GLCall(glBindBuffer(GL_ARRAY_BUFFER, b));
-		GLCall(glDrawArrays(GL_POINTS, 0, 10000*10));
+		GLCall(glDrawArrays(GL_POINTS, 0, 10000*10));*/
 		
-		//gRenderer.Draw(ArrPoints, inbu, shPoints,GL_POINTS);
 		// Start the Dear ImGui frame
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();

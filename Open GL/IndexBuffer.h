@@ -7,6 +7,7 @@ public:
 	IndexBuffer(const unsigned int* data, unsigned int count);
 	~IndexBuffer();
 
+	void SetData(unsigned int* data, unsigned int size, unsigned int offset = 0) const;
 	void Bind() const;
 	void Unbind() const;
 
