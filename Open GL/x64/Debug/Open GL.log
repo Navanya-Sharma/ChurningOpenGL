@@ -1,3 +1,5 @@
 ﻿  ChaosGame.cpp
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\ChaosGame.cpp(33,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  main.cpp
+  Generating Code...
   Open GL.vcxproj -> C:\Users\sharm\source\repos\Open GL\Git\x64\Debug\Open GL.exe

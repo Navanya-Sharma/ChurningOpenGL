@@ -37,7 +37,7 @@ int main() {
 	float color[4] = { 0.45f, 0.55f, 0.60f, 1.00f };
 	const int TotalScenes = 3;
 	char SceneNames[TotalScenes][32] = { "Rainbow Square", "Model View Projection", "Chaos Game" };
-	gSceneManager.ChangeScene(std::make_unique<ChaosGame>()); 
+	//gSceneManager.ChangeScene(std::make_unique<ChaosGame>()); 
 
 	while (!glfwWindowShouldClose(Window))
 	{

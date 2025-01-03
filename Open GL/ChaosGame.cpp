@@ -57,7 +57,6 @@ void ChaosGame::Init()
 		GLCall(glDispatchCompute(10000, 1, 1));
 		GLCall(glMemoryBarrier(GL_ALL_BARRIER_BITS));
 		GLCall(glGetTexImage(GL_TEXTURE_2D, 0, GL_RG, GL_FLOAT, xn + i));
-		printf("%f %f\n", xn[i], xn[i + 1]);
 	}
 	m_pointsArr.Bind();
 	m_pointsBuff.Bind();
