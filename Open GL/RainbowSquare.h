@@ -1,7 +1,7 @@
 #pragma once
 #include "Scene.h"
-#include "VertexArray.h"
-#include "IndexBuffer.h"
+//#include "VertexArray.h"
+//#include "IndexBuffer.h"
 
 class RainbowSquare : public Scene {
 private:

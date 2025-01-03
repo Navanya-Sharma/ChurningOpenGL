@@ -1457,13 +1457,16 @@
     <None Include="res\Basic.shader">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="res\Basic2.shader">
+    <None Include="res\ChaosGame.shader">
       <Filter>Shaders</Filter>
     </None>
     <None Include="res\Compute.shader">
       <Filter>Shaders</Filter>
     </None>
     <None Include="res\Rainbow.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\MVP.shader">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

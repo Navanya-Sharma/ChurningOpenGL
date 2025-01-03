@@ -470,7 +470,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Basic.shader" />
-    <None Include="res\Basic2.shader" />
+    <None Include="res\ChaosGame.shader" />
     <None Include="res\Compute.shader" />
     <None Include="res\glm\detail\func_common.inl" />
     <None Include="res\glm\detail\func_common_simd.inl" />
@@ -610,6 +610,7 @@
     <None Include="res\glm\gtx\vector_angle.inl" />
     <None Include="res\glm\gtx\vector_query.inl" />
     <None Include="res\glm\gtx\wrap.inl" />
+    <None Include="res\MVP.shader" />
     <None Include="res\Rainbow.shader" />
   </ItemGroup>
   <ItemGroup>

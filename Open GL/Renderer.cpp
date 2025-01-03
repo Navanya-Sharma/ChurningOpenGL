@@ -37,7 +37,7 @@ void Renderer::Draw(VertexArray& va, IndexBuffer& ib, Shader& sh, GLenum Type) c
 	if (Type != NULL) {
 		va.Bind();
 		sh.Bind();
-		GLCall(glDrawArrays(GL_POINTS, 0, 100));
+		GLCall(glDrawArrays(GL_POINTS, 0, 100000));
 		return;
 	}
 	va.Bind();

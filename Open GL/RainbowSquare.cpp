@@ -1,9 +1,5 @@
 #include "RainbowSquare.h"
-#include "VertexBuffer.h"
 #include "BufferLayout.h"
-#include "IndexBuffer.h"
-#include "VertexArray.h"
-#include "Shader.h"
 
 
 void RainbowSquare::UpdateColor()
@@ -41,7 +37,8 @@ void RainbowSquare::UpdateColor()
 }
 
 RainbowSquare::RainbowSquare():
-	m_vertArr(), m_vertBuff(NULL,2*4*sizeof(float)), m_indBuff(NULL,2*3*sizeof(unsigned int)), m_shader("res/Rainbow.Shader"),m_color{1.0f,0.0f,0.0f}
+	m_vertArr(), m_vertBuff(NULL,2*4*sizeof(float)), 
+	m_indBuff(NULL,2*3*sizeof(unsigned int)), m_shader("res/Rainbow.Shader"),m_color{1.0f,0.0f,0.0f}
 {
 }
 
@@ -62,7 +59,7 @@ void RainbowSquare::Init()
 	BufferLayout layRain;
 	layRain.Push<float>(2);
 	m_vertArr.AddBuffer(m_vertBuff, layRain);
-	m_indBuff.SetData(indData,6*sizeof(float));
+	m_indBuff.SetData(indData,6*sizeof(unsigned int));
 
 }
 
@@ -75,7 +72,6 @@ void RainbowSquare::Update(Renderer* gRenderer)
 
 void RainbowSquare::Close()
 {
-	delete(m_color);
 	m_vertArr.~VertexArray();
 	m_vertBuff.~VertexBuffer();
 	m_shader.~Shader();

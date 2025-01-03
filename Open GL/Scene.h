@@ -14,9 +14,7 @@ class SceneManager {
 private:
 	std::unique_ptr<Scene> currScene = nullptr;
 public:
-	/*enum Scenes
-	{ RainbowSquare=0, ModelViewProjection=1, ChaosGame=2, TotalScenes
-	};*/
+
 	inline bool Init() {
 		if (currScene!=nullptr) { 
 			currScene->Init(); 
