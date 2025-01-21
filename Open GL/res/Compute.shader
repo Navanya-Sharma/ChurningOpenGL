@@ -1,1 +1,28 @@
-#shader compute#version 460 corelayout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;layout(rg32f, binding = 0) uniform image2D out_tex;#define H(p) (sin(fract(sin(dot(p, vec2(12.9898, 78.233)))) * 43758.5453)*10.)*.5+.5void main() {    vec2 vert[3] = {vec2(-0.5f,-0.5f),vec2(0.5f,-0.5f), vec2(0.0f,0.5f)};    // get position to read/write data from    ivec2 pos = ivec2( gl_GlobalInvocationID.xy );    // get value stored in the image    vec2 in_val = imageLoad( out_tex, pos ).rg;    int r =int(H(in_val))%3;        vec2 curvert = vert[r];    // store new value in image    //imageStore( out_tex, pos, vec4( 1, 2, 0.0, 1.0 ) );    imageStore( out_tex, pos, vec4( (in_val.r + curvert.x)/2, (in_val.g +curvert.y)/2, 0.0, 1.0 ) );        }
+#shader compute
+#version 460 core
+
+
+layout(local_size_x = 256) in;
+
+// Bind vertex buffer as shader storage buffer
+layout(std430, binding = 0) buffer vbo {
+    vec2 positions[];
+} vertexBuffer;
+
+layout(std430, binding = 1) buffer triangle {
+    float vertices[6];
+} triVert;
+
+#define H(p) (sin(fract(sin(dot(p, vec2(12.9898, 78.233)))) * 43758.5453)*10.)*.5+.5 
+
+void main() {
+    uint index = gl_GlobalInvocationID.x;
+            
+    // Read position
+    vec2 pos = vertexBuffer.positions[index];
+            
+    int r = int(H(pos))%3;
+    vec2 curvert = vec2(triVert.vertices[2*r],triVert.vertices[2*r+1]);
+
+    vertexBuffer.positions[index+25600]=vec2((pos.x + curvert.x)/2, (pos.y +curvert.y)/2);
+}

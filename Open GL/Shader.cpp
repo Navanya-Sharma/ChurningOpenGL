@@ -41,7 +41,11 @@ void Shader::SetUniform4f(const std::string& name, float v0, float v1, float v2,
 	Bind();
 	GLCall(glUniform4f(GetUniformLocation(name), v0, v1, v2, v3));
 }
-
+void Shader::SetUniform1fv(const std::string& name, int count, float *data)
+{
+	Bind();
+	GLCall(glUniform1fv(GetUniformLocation(name), count, data));
+}
 void Shader::SetUniformMat4(const std::string& name, glm::mat4 mat)
 {
 	Bind();
@@ -72,7 +76,7 @@ ShaderProgramSource Shader::ParseShader(const std::string& path) {
 	std::string ans[3] = { "","",""};
 	Shadertype type = Shadertype::NONE;
 
-	while (getline(stream, line, '\r')) {
+	while (getline(stream, line, '\n')) {
 		if (line.find("#shader") != std::string::npos) {
 			if (line.find("fragment") != std::string::npos)
 				type = Shadertype::FRAGMENT;
@@ -112,6 +116,7 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 		printf("%s", message);
 
 		glDeleteShader(id);
+		ASSERT(0);
 		return 0;
 	}
 
@@ -121,21 +126,25 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 unsigned int Shader::CreateShader(const std::string& verShade, const std::string& fragShade, 
 	const std::string& CompShade) {
 	unsigned int pro = glCreateProgram();
-	unsigned int vs = CompileShader(GL_VERTEX_SHADER, verShade);
-	unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragShade);
-	unsigned int cs;
+	unsigned int vs,fs,cs;
+	if (verShade != "") {
+		vs = CompileShader(GL_VERTEX_SHADER, verShade);
+		glAttachShader(pro, vs);
+	}
+	if (fragShade !="") {
+		fs = CompileShader(GL_FRAGMENT_SHADER, fragShade);
+		glAttachShader(pro, fs);
+	}
 	if (CompShade != "") {
 		cs = CompileShader(GL_COMPUTE_SHADER, CompShade);
 		glAttachShader(pro, cs);
 	}
 
-	glAttachShader(pro, vs);
-	glAttachShader(pro, fs);
 	glLinkProgram(pro);
 	glValidateProgram(pro);
 
-	glDeleteShader(vs);
-	glDeleteShader(fs);
+	if (verShade != "") glDeleteShader(vs);
+	if (fragShade != "") glDeleteShader(fs);
 	if (CompShade != "") glDeleteShader(cs);
 
 	//glDetachShader(pro, vs);

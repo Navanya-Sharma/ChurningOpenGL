@@ -2,7 +2,7 @@
 #include "res/stb_image.h"
 
 
-Texture::Texture(const std::string& path)
+Texture::Texture(const std::string& path, int b)
 	:m_RendererID(0), m_FilePath(path), m_LocalBuffer(nullptr), m_Width(0),
 	m_Height(0),m_BPP(0)
 {
@@ -25,10 +25,11 @@ Texture::Texture(const std::string& path)
 	else {
 		stbi_set_flip_vertically_on_load(1);
 		m_LocalBuffer = stbi_load(path.c_str(), &m_Width, &m_Height, &m_BPP, 4);
-		GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_LocalBuffer));
+		if (m_LocalBuffer == nullptr) { ASSERT(0); }
+		else { GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_LocalBuffer));}
 	}
 
-	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+	GLCall(glBindTexture(GL_TEXTURE_2D, b));
 
 	if (m_LocalBuffer)
 		stbi_image_free(m_LocalBuffer);

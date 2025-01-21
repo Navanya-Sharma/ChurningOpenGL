@@ -22,6 +22,8 @@
 #include "RainbowSquare.h"
 #include "ModelViewProjection.h"
 #include "ChaosGame.h"
+#include "ShaderAssignment.h"
+#include "TextureAssignment.h"
 
 int main() {
 	const int SCREEN_WIDTH = 1200;
@@ -35,9 +37,11 @@ int main() {
 	SceneManager gSceneManager;
 
 	float color[4] = { 0.45f, 0.55f, 0.60f, 1.00f };
-	const int TotalScenes = 3;
-	char SceneNames[TotalScenes][32] = { "Rainbow Square", "Model View Projection", "Chaos Game" };
-	//gSceneManager.ChangeScene(std::make_unique<ChaosGame>()); 
+	const int TotalScenes = 5;
+	char SceneNames[TotalScenes][32] = { "Rainbow Square", "Model View Projection", "Chaos Game",
+	"ShaderAssignment","TextureAssignment"};
+	//gSceneManager.ChangeScene(std::make_unique<TextureAssignment>());
+
 
 	while (!glfwWindowShouldClose(Window))
 	{
@@ -55,6 +59,8 @@ int main() {
 			case 0: gSceneManager.ChangeScene(std::make_unique<RainbowSquare>()); break; //Since RainbowSquare inherits from Scene, this can be implicitly converted to a unique_ptr<Scene> Polymorphism
 			case 1: gSceneManager.ChangeScene(std::make_unique<ModelViewProjection>()); break;
 			case 2: gSceneManager.ChangeScene(std::make_unique<ChaosGame>()); break;
+			case 3: gSceneManager.ChangeScene(std::make_unique<ShaderAssignment>()); break;
+			case 4: gSceneManager.ChangeScene(std::make_unique<TextureAssignment>()); break;
 			}
 		}
 

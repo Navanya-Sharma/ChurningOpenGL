@@ -106,6 +106,15 @@
     <ClCompile Include="ModelViewProjection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderAssignment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureAssignment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
@@ -1038,6 +1047,15 @@
     <ClInclude Include="ModelViewProjection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderAssignment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureAssignment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\glm\ext\matrix_clip_space.inl">
@@ -1467,6 +1485,12 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="res\MVP.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\ShaderAssignment.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\TextureAssignment.shader">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

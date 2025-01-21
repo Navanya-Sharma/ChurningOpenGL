@@ -1,4 +1,5 @@
 C:\Softwares\Clibs\glad\src\glad.c;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\glad.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\Base.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Base.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\BufferLayout.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\BufferLayout.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\ChaosGame.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\ChaosGame.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\core.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\core.obj
@@ -18,6 +19,8 @@ C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\IMGui\imgui_widgets.cpp;C:\U
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\stb_image.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\stb_image.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\RainbowSquare.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\RainbowSquare.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\Shader.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Shader.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\ShaderAssignment.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\ShaderAssignment.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\Texture.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Texture.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\TextureAssignment.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\TextureAssignment.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\VertexArray.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\VertexArray.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\VertexBuffer.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\VertexBuffer.obj

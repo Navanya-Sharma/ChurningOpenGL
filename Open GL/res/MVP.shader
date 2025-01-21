@@ -1,1 +1,30 @@
-#shader vertex#version 460 corelayout (location = 0) in vec4 position;layout (location = 1) in vec2 texCord;out vec2 v_TexCord;uniform mat4 u_MVP;void main(){	gl_Position = u_MVP*position;	v_TexCord = texCord;};#shader fragment#version 460 corelayout(location=0) out vec4 color;in vec2 v_TexCord;uniform sampler2D u_Texture;void main(){	vec4 texColor= texture(u_Texture, v_TexCord);	color=texColor;};
+#shader vertex
+#version 460 core
+
+layout (location = 0) in vec4 position;
+layout (location = 1) in vec2 texCord;
+
+out vec2 v_TexCord;
+
+uniform mat4 u_MVP;
+
+void main()
+{
+	gl_Position = u_MVP*position;
+	v_TexCord = texCord;
+};
+
+#shader fragment
+#version 460 core
+
+layout(location=0) out vec4 color;
+
+in vec2 v_TexCord;
+
+uniform sampler2D u_Texture;
+
+void main()
+{
+	vec4 texColor= texture(u_Texture, v_TexCord);
+	color=texColor;
+};

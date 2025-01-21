@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\Softwares\Clibs\glad\src\glad.c" />
+    <ClCompile Include="Base.cpp" />
     <ClCompile Include="BufferLayout.cpp" />
     <ClCompile Include="ChaosGame.cpp" />
     <ClCompile Include="core.cpp" />
@@ -152,11 +153,14 @@
     <ClCompile Include="res\stb_image.cpp" />
     <ClCompile Include="RainbowSquare.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderAssignment.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureAssignment.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Base.h" />
     <ClInclude Include="BufferLayout.h" />
     <ClInclude Include="ChaosGame.h" />
     <ClInclude Include="core.h" />
@@ -464,7 +468,9 @@
     <ClInclude Include="res\stb_image.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderAssignment.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureAssignment.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
@@ -612,6 +618,8 @@
     <None Include="res\glm\gtx\wrap.inl" />
     <None Include="res\MVP.shader" />
     <None Include="res\Rainbow.shader" />
+    <None Include="res\ShaderAssignment.shader" />
+    <None Include="res\TextureAssignment.shader" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\glm\CMakeLists.txt" />
