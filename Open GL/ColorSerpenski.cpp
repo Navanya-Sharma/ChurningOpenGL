@@ -2,6 +2,7 @@
 #include "BufferLayout.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include <GLFW/glfw3.h>
 
 ColorSerpenski::ColorSerpenski() :
 	m_vertArr(), m_vertBuff(NULL, 15 * sizeof(float)),
@@ -33,29 +34,49 @@ void ColorSerpenski::Init()
 
 void ColorSerpenski::Update(Renderer* gRenderer)
 {
-	float scaleFactor = 1.0f;
-	for(int i=0;i<10;i++)
+	glm::mat4 mvp = glm::mat4(1.0f);
+	m_shader.SetUniformMat4("uMVP", mvp);
+	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+
+	glm::mat4 rot = glm::rotate(glm::mat4(1.0f), (float)glfwGetTime(), glm::vec3(0, 1, 0));
+	mvp = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, -0.5f, 0))*rot;
+	m_shader.SetUniformMat4("uMVP", mvp);
+	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+
+	DrawSerpent(glm::vec2(0, 0), 0.25, 1, gRenderer);
+}
+
+void ColorSerpenski::DrawSerpent(glm::vec2 center, float scale, int depth, Renderer* gRenderer)
+{
+	if (depth == 7) 
 	{
-		glm::mat4 mvp = glm::scale(glm::mat4(1.0f), glm::vec3(scaleFactor, std::pow(-1,i)*scaleFactor, 0));
-		m_shader.SetUniformMat4("uMVP", mvp);
-		gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
-		scaleFactor *= 0.5f;
+		return;
 	}
-	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.25, -0.25, 0));
-	glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0,std::pow(3,0.5)/6,0));
-	glm::mat4 mvp = trans * scale;
+
+	glm::vec2 c1(center.x , center.y+(2*std::pow(3,0.5)*scale)/3);
+	glm::vec2 c2(center.x - scale, center.y - scale / std::pow(3, 0.5));
+	glm::vec2 c3(center.x + scale, center.y - scale / std::pow(3, 0.5));
+
+	glm::mat4 scaleMat = glm::scale(glm::mat4(1.0f), glm::vec3(scale,- scale, 0));
+	glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(c1, 0));
+	glm::mat4 rot = glm::rotate(glm::mat4(1.0f),(float)glfwGetTime(), glm::vec3(0,1,0));
+	glm::mat4 mvp = trans * scaleMat*rot;
 	m_shader.SetUniformMat4("uMVP", mvp);
 	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
 
-	trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.25, -std::pow(3, 0.5) / 12, 0));
-	mvp = trans * scale;
+	trans = glm::translate(glm::mat4(1.0f), glm::vec3(c2, 0));
+	mvp = trans * scaleMat * rot;;
 	m_shader.SetUniformMat4("uMVP", mvp);
 	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
 
-	trans = glm::translate(glm::mat4(1.0f), glm::vec3(-0.25, -std::pow(3, 0.5) / 12, 0));
-	mvp = trans * scale;
+	trans = glm::translate(glm::mat4(1.0f), glm::vec3(c3, 0));
+	mvp = trans * scaleMat * rot;
 	m_shader.SetUniformMat4("uMVP", mvp);
 	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+
+	DrawSerpent(c1, scale * 0.5f, depth + 1, gRenderer);
+	DrawSerpent(c2, scale * 0.5f, depth + 1, gRenderer);
+	DrawSerpent(c3, scale * 0.5f, depth + 1, gRenderer);
 }
 
 void ColorSerpenski::Close()

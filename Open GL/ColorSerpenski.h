@@ -8,6 +8,8 @@ private:
 	IndexBuffer	m_indBuff;
 	Shader	m_shader;
 
+	void DrawSerpent(glm::vec2 center, float scale, int depth, Renderer* gRenderer);
+
 public:
 	ColorSerpenski();
 	void Init() override;

@@ -42,7 +42,7 @@ int main() {
 	const int TotalScenes = 7;
 	char SceneNames[TotalScenes][32] = { "Rainbow Square", "Model View Projection", "Chaos Game",
 	"ShaderAssignment","TextureAssignment","TransformAssignment","ColorfulSerpenski"};
-	gSceneManager.ChangeScene(std::make_unique<ColorSerpenski>());
+	//gSceneManager.ChangeScene(std::make_unique<ColorSerpenski>());
 
 
 	while (!glfwWindowShouldClose(Window))
