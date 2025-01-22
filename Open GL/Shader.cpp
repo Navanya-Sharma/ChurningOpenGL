@@ -68,6 +68,10 @@ int Shader::GetUniformLocation(const std::string& name)
 ShaderProgramSource Shader::ParseShader(const std::string& path) {
 	std::ifstream stream(path);
 
+	if (stream.fail()) {
+		std::cerr << "Error: Failed to open file at path: " << path << std::endl;
+		ASSERT(0);
+	}
 	enum class Shadertype {
 		NONE = -1, VERTEX = 0, FRAGMENT = 1, COMPUTE =2
 	};

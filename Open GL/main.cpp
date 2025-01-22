@@ -24,10 +24,12 @@
 #include "ChaosGame.h"
 #include "ShaderAssignment.h"
 #include "TextureAssignment.h"
+#include "TransformAssignment.h"
+#include "ColorSerpenski.h"
 
 int main() {
-	const int SCREEN_WIDTH = 1200;
-	const int SCREEN_HEIGHT = 800;
+	const int SCREEN_WIDTH = 1000;
+	const int SCREEN_HEIGHT = 1000;
 
 	GLFWwindow* Window = Init(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -37,10 +39,10 @@ int main() {
 	SceneManager gSceneManager;
 
 	float color[4] = { 0.45f, 0.55f, 0.60f, 1.00f };
-	const int TotalScenes = 5;
+	const int TotalScenes = 7;
 	char SceneNames[TotalScenes][32] = { "Rainbow Square", "Model View Projection", "Chaos Game",
-	"ShaderAssignment","TextureAssignment"};
-	//gSceneManager.ChangeScene(std::make_unique<TextureAssignment>());
+	"ShaderAssignment","TextureAssignment","TransformAssignment","ColorfulSerpenski"};
+	gSceneManager.ChangeScene(std::make_unique<ColorSerpenski>());
 
 
 	while (!glfwWindowShouldClose(Window))
@@ -61,6 +63,8 @@ int main() {
 			case 2: gSceneManager.ChangeScene(std::make_unique<ChaosGame>()); break;
 			case 3: gSceneManager.ChangeScene(std::make_unique<ShaderAssignment>()); break;
 			case 4: gSceneManager.ChangeScene(std::make_unique<TextureAssignment>()); break;
+			case 5: gSceneManager.ChangeScene(std::make_unique<TransformAssignment>()); break;
+			case 6: gSceneManager.ChangeScene(std::make_unique<ColorSerpenski>()); break;
 			}
 		}
 
