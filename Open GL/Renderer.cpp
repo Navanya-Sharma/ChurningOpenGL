@@ -32,23 +32,35 @@ void Renderer::EnableBlending()
 	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 }
 
-void Renderer::Draw(VertexArray& va, IndexBuffer& ib, Shader& sh, GLenum Type) const
+void Renderer::EnableDepthTest()
 {
-	if (Type != NULL) {
-		va.Bind();
-		sh.Bind();
-		GLCall(glDrawArrays(GL_POINTS, 0, 100000));
-		return;
-	}
+	GLCall(glEnable(GL_DEPTH_TEST));
+
+}
+
+void Renderer::Draw(VertexArray& va, IndexBuffer& ib, Shader& sh) const
+{
 	va.Bind();
 	ib.Bind();
 	sh.Bind();
 	GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
 }
 
+void Renderer::DrawArray(VertexArray& va, Shader& sh, GLenum type, int count)
+{
+	va.Bind();
+	sh.Bind();
+	glDrawArrays(type, 0, count);
+}
+
 void Renderer::Clear()
 {
 	GLCall(glClear(GL_COLOR_BUFFER_BIT));
+}
+
+void Renderer::ClearDepthBuffer()
+{
+	GLCall(glClear(GL_DEPTH_BUFFER_BIT));
 }
 
 void Renderer::SetClearColor(float* color)

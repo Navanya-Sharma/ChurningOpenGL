@@ -6,6 +6,7 @@
 #include "IMGui/imgui_impl_glfw.h"
 #include "IMGui/imgui_impl_opengl3.h"
 
+
 GLFWwindow* Init(int Width, int Height)
 {
 	glfwInit();
@@ -47,7 +48,7 @@ void InitImGui(GLFWwindow* Window) {
 	ImGui::StyleColorsDark();
 }
 
-int UpdateImGui(float* color, char SceneName[][32], int TotalScenes) {
+int UpdateImGui(float* color, char SceneName[][32], int TotalScenes, SceneManager* gSceneManager) {
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
@@ -61,17 +62,44 @@ int UpdateImGui(float* color, char SceneName[][32], int TotalScenes) {
 	
 	static int selected = -1;
 	int changed = 0;
-	for (int i = 0; i < TotalScenes; i++)
+	/*for (int i = 0; i < TotalScenes; i++)
 	{
 		if (ImGui::Selectable(SceneName[i], selected == i)) {
 			changed =1;
 			selected = i;
 		}
+	}*/
+	
+	int isO = 0;
+	static int lastOpened = -1;
+	for (int i = 0; i < TotalScenes; i++)
+	{
+		int flagOpen = ImGui::CollapsingHeader(SceneName[i]);
+		
+		if (flagOpen && lastOpened != i) {
+			//Close the last Opened
+			ImGui::SetNextItemOpen(false);
+			ImGui::CollapsingHeader(SceneName[lastOpened]);
+			lastOpened = i;
+		}
+
+		if(flagOpen)
+		{
+			gSceneManager->UpdateImGui();
+			if (selected != i) {
+				changed = 1;
+				selected = i;
+			}
+		}
 	}
+
 	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
 	
+	
+
 	ImGui::End();
 
+	
 	//ImGui::ShowDemoWindow();
 
 	ImGui::Render();

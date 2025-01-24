@@ -7,6 +7,7 @@ class Scene
 public:
 	virtual void Init() = 0;
 	virtual void Update(Renderer* gRenderer) = 0;
+	virtual void UpdateImGui() { };
 	virtual void Close() = 0;
 };
 
@@ -25,7 +26,10 @@ public:
 		}
 	}
 	inline void Update(Renderer* gRenderer) {
-		if (currScene!=nullptr) currScene->Update(gRenderer);
+		if (currScene != nullptr) currScene->Update(gRenderer);
+	}
+	inline void UpdateImGui() {
+		if (currScene != nullptr) currScene->UpdateImGui();
 	}
 	void ChangeScene(std::unique_ptr<Scene> NewScene) {
 		if(currScene!=nullptr) currScene->Close();

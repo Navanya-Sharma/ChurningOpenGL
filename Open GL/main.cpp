@@ -26,6 +26,7 @@
 #include "TextureAssignment.h"
 #include "TransformAssignment.h"
 #include "ColorSerpenski.h"
+#include "CoordinateAssignment.h"
 
 int main() {
 	const int SCREEN_WIDTH = 1000;
@@ -39,10 +40,10 @@ int main() {
 	SceneManager gSceneManager;
 
 	float color[4] = { 0.45f, 0.55f, 0.60f, 1.00f };
-	const int TotalScenes = 7;
+	const int TotalScenes = 8;
 	char SceneNames[TotalScenes][32] = { "Rainbow Square", "Model View Projection", "Chaos Game",
-	"ShaderAssignment","TextureAssignment","TransformAssignment","ColorfulSerpenski"};
-	//gSceneManager.ChangeScene(std::make_unique<ColorSerpenski>());
+	"ShaderAssignment","TextureAssignment","TransformAssignment","ColorfulSerpenski","CoordinateAssignment"};
+	gSceneManager.ChangeScene(std::make_unique<CoordinateAssignment>());
 
 
 	while (!glfwWindowShouldClose(Window))
@@ -50,10 +51,11 @@ int main() {
 		gRenderer.SetClearColor(color);
 		gRenderer.Clear();
 
-		gSceneManager.Update(&gRenderer);
 
 		static int SceneNo;
-		SceneNo = UpdateImGui(color, SceneNames, TotalScenes);
+		SceneNo = UpdateImGui(color, SceneNames, TotalScenes, &gSceneManager);
+
+		gSceneManager.Update(&gRenderer);
 
 		if (SceneNo != -1) {
 			switch (SceneNo)
@@ -65,6 +67,7 @@ int main() {
 			case 4: gSceneManager.ChangeScene(std::make_unique<TextureAssignment>()); break;
 			case 5: gSceneManager.ChangeScene(std::make_unique<TransformAssignment>()); break;
 			case 6: gSceneManager.ChangeScene(std::make_unique<ColorSerpenski>()); break;
+			case 7: gSceneManager.ChangeScene(std::make_unique<CoordinateAssignment>()); break;
 			}
 		}
 

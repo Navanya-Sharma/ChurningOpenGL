@@ -121,6 +121,9 @@
     <ClCompile Include="ColorSerpenski.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CoordinateAssignment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
@@ -1068,6 +1071,9 @@
     <ClInclude Include="ColorSerpenski.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CoordinateAssignment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\glm\ext\matrix_clip_space.inl">
@@ -1509,6 +1515,9 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="res\ColorSerpenski.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\CoordinateAssignment.shader">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

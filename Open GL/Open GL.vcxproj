@@ -137,6 +137,7 @@
     <ClCompile Include="BufferLayout.cpp" />
     <ClCompile Include="ChaosGame.cpp" />
     <ClCompile Include="ColorSerpenski.cpp" />
+    <ClCompile Include="CoordinateAssignment.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="main.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="BufferLayout.h" />
     <ClInclude Include="ChaosGame.h" />
     <ClInclude Include="ColorSerpenski.h" />
+    <ClInclude Include="CoordinateAssignment.h" />
     <ClInclude Include="core.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="ModelViewProjection.h" />
@@ -483,6 +485,7 @@
     <None Include="res\ChaosGame.shader" />
     <None Include="res\ColorSerpenski.shader" />
     <None Include="res\Compute.shader" />
+    <None Include="res\CoordinateAssignment.shader" />
     <None Include="res\glm\detail\func_common.inl" />
     <None Include="res\glm\detail\func_common_simd.inl" />
     <None Include="res\glm\detail\func_exponential.inl" />
