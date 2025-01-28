@@ -135,6 +135,7 @@
     <ClCompile Include="..\..\..\..\..\..\..\Softwares\Clibs\glad\src\glad.c" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="BufferLayout.cpp" />
+    <ClCompile Include="CameraAssignment.cpp" />
     <ClCompile Include="ChaosGame.cpp" />
     <ClCompile Include="ColorSerpenski.cpp" />
     <ClCompile Include="CoordinateAssignment.cpp" />
@@ -165,6 +166,7 @@
   <ItemGroup>
     <ClInclude Include="Base.h" />
     <ClInclude Include="BufferLayout.h" />
+    <ClInclude Include="CameraAssignment.h" />
     <ClInclude Include="ChaosGame.h" />
     <ClInclude Include="ColorSerpenski.h" />
     <ClInclude Include="CoordinateAssignment.h" />
@@ -481,6 +483,7 @@
     <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CameraAssignment.shader" />
     <None Include="res\Basic.shader" />
     <None Include="res\ChaosGame.shader" />
     <None Include="res\ColorSerpenski.shader" />

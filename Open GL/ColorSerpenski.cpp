@@ -32,27 +32,28 @@ void ColorSerpenski::Init()
 	m_indBuff.SetData(ind, 3 * sizeof(unsigned int));
 }
 
-void ColorSerpenski::Update(Renderer* gRenderer)
+void ColorSerpenski::Update()
 {
+	Renderer& gRenderer = Renderer::GetRenderer();
 	glm::mat4 mvp = glm::mat4(1.0f);
 	m_shader.SetUniformMat4("uMVP", mvp);
-	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 
 	glm::mat4 rot = glm::rotate(glm::mat4(1.0f), (float)glfwGetTime(), glm::vec3(0, 1, 0));
 	mvp = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, -0.5f, 0))*rot;
 	m_shader.SetUniformMat4("uMVP", mvp);
-	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 
-	DrawSerpent(glm::vec2(0, 0), 0.25, 1, gRenderer);
+	DrawSerpent(glm::vec2(0, 0), 0.25, 1);
 }
 
-void ColorSerpenski::DrawSerpent(glm::vec2 center, float scale, int depth, Renderer* gRenderer)
+void ColorSerpenski::DrawSerpent(glm::vec2 center, float scale, int depth)
 {
 	if (depth == 7) 
 	{
 		return;
 	}
-
+	Renderer& gRenderer = Renderer::GetRenderer();
 	glm::vec2 c1(center.x , center.y+(2*std::pow(3,0.5)*scale)/3);
 	glm::vec2 c2(center.x - scale, center.y - scale / std::pow(3, 0.5));
 	glm::vec2 c3(center.x + scale, center.y - scale / std::pow(3, 0.5));
@@ -62,21 +63,21 @@ void ColorSerpenski::DrawSerpent(glm::vec2 center, float scale, int depth, Rende
 	glm::mat4 rot = glm::rotate(glm::mat4(1.0f),(float)glfwGetTime(), glm::vec3(0,1,0));
 	glm::mat4 mvp = trans * scaleMat*rot;
 	m_shader.SetUniformMat4("uMVP", mvp);
-	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 
 	trans = glm::translate(glm::mat4(1.0f), glm::vec3(c2, 0));
 	mvp = trans * scaleMat * rot;;
 	m_shader.SetUniformMat4("uMVP", mvp);
-	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 
 	trans = glm::translate(glm::mat4(1.0f), glm::vec3(c3, 0));
 	mvp = trans * scaleMat * rot;
 	m_shader.SetUniformMat4("uMVP", mvp);
-	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 
-	DrawSerpent(c1, scale * 0.5f, depth + 1, gRenderer);
-	DrawSerpent(c2, scale * 0.5f, depth + 1, gRenderer);
-	DrawSerpent(c3, scale * 0.5f, depth + 1, gRenderer);
+	DrawSerpent(c1, scale * 0.5f, depth + 1);
+	DrawSerpent(c2, scale * 0.5f, depth + 1);
+	DrawSerpent(c3, scale * 0.5f, depth + 1);
 }
 
 void ColorSerpenski::Close()

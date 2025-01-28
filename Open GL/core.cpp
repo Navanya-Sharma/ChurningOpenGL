@@ -37,7 +37,7 @@ void InitImGui(GLFWwindow* Window) {
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
 	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
@@ -46,9 +46,10 @@ void InitImGui(GLFWwindow* Window) {
 	ImGui_ImplOpenGL3_Init(glsl_version);
 
 	ImGui::StyleColorsDark();
+
 }
 
-int UpdateImGui(float* color, char SceneName[][32], int TotalScenes, SceneManager* gSceneManager) {
+int UpdateImGui(float* color, char SceneName[][32], int TotalScenes) {
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
@@ -72,10 +73,12 @@ int UpdateImGui(float* color, char SceneName[][32], int TotalScenes, SceneManage
 	
 	int isO = 0;
 	static int lastOpened = -1;
+	/*static bool once = true;
+	int WorkingScene = 7;*/
 	for (int i = 0; i < TotalScenes; i++)
 	{
 		int flagOpen = ImGui::CollapsingHeader(SceneName[i]);
-		
+
 		if (flagOpen && lastOpened != i) {
 			//Close the last Opened
 			ImGui::SetNextItemOpen(false);
@@ -83,13 +86,15 @@ int UpdateImGui(float* color, char SceneName[][32], int TotalScenes, SceneManage
 			lastOpened = i;
 		}
 
-		if(flagOpen)
+		if(flagOpen /* || (once and i == WorkingScene) */ )
 		{
-			gSceneManager->UpdateImGui();
+			SceneManager& gSceneManager = SceneManager::GetManager();
+			gSceneManager.UpdateImGui();
 			if (selected != i) {
 				changed = 1;
 				selected = i;
 			}
+			//once = false;
 		}
 	}
 

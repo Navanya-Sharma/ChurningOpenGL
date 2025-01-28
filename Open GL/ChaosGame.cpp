@@ -55,10 +55,11 @@ void ChaosGame::Init()
 	free(x);
 }
 
-void ChaosGame::Update(Renderer* gRenderer)
+void ChaosGame::Update()
 {
+	Renderer& gRenderer = Renderer::GetRenderer();
 	m_shader.SetUniform4f("u_color", 1.0f, 1.0f, 1.0f, 1.0f);
-	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 	m_shader.SetUniform4f("u_color", 0.0f, 0.0f, 0.0f, 1.0f);
 	//
 	// gRenderer->Draw(m_pointsArr, m_indBuff, m_shader,GL_POINTS);

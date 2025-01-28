@@ -30,12 +30,13 @@ void ShaderAssignment::Init()
 
 }
 
-void ShaderAssignment::Update(Renderer* gRenderer)
+void ShaderAssignment::Update()
 {
+	Renderer& gRenderer = Renderer::GetRenderer();
 	static float d = 0.0f;
 	d += 0.005f;
 	m_shader.SetUniform1fv("move", 1, &d);
-	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 }
 
 void ShaderAssignment::Close()

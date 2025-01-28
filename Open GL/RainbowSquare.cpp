@@ -63,11 +63,12 @@ void RainbowSquare::Init()
 
 }
 
-void RainbowSquare::Update(Renderer* gRenderer)
+void RainbowSquare::Update()
 {
+	Renderer& gRenderer = Renderer::GetRenderer();
 	UpdateColor();
 	m_shader.SetUniform4f("u_color", m_color[0], m_color[1], m_color[2], 1.0f);
-	gRenderer->Draw(m_vertArr,m_indBuff,m_shader);
+	gRenderer.Draw(m_vertArr,m_indBuff,m_shader);
 }
 
 void RainbowSquare::Close()

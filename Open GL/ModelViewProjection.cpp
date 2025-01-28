@@ -48,8 +48,9 @@ void ModelViewProjection::Init()
 
 }
 
-void ModelViewProjection::Update(Renderer* gRenderer)
+void ModelViewProjection::Update()
 {
+	Renderer& gRenderer = Renderer::GetRenderer();
 	glm::mat4 proj = glm::ortho(0.0f, 1200.0f, 0.0f, 800.0f, -1.0f, 1.0f);
 	/*0.0025	0	 0	 -1
 		0	0.0025	 0	 -1
@@ -61,19 +62,19 @@ void ModelViewProjection::Update(Renderer* gRenderer)
 		0   0  1    0
 		0   0  0    1 */
 	m_texture.Bind();
-	gRenderer->EnableBlending();
+	gRenderer.EnableBlending();
 	static int i = 0;
 	{
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(-250,i++, 0));
 		glm::mat4 mvp = proj * veiw * model;
 		m_shader.SetUniformMat4("u_MVP", mvp);
-		gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+		gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 	}
 	{
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(250, -i, 0));
 		glm::mat4 mvp = proj * veiw * model;
 		m_shader.SetUniformMat4("u_MVP", mvp);
-		gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+		gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 	}
 
 	/*ImGuiIO& io = ImGui::GetIO(); (void)io;

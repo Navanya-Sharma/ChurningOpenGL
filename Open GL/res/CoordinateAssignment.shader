@@ -2,9 +2,9 @@
 #version 460 core
 
 layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec2 aColor;
+layout (location = 1) in vec3 aColor;
 
-out vec2 vColor;
+out vec3 vColor;
 
 uniform mat4 uMVP;
 
@@ -19,11 +19,10 @@ void main()
 
 layout(location=0) out vec4 fColor;
 
-in vec2 vColor;
-
-uniform sampler2D uText;
+in vec3 vColor;
 
 void main()
 {
-	fColor=texture(uText,vColor);
+	//fColor=texture(uText,vColor);
+	fColor=vec4(vColor,0.0f);
 };

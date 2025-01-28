@@ -12,9 +12,10 @@ void Base::Init()
 	
 }
 
-void Base::Update(Renderer* gRenderer)
+void Base::Update()
 {
-	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+	Renderer& gRenderer = Renderer::GetRenderer();
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 }
 
 void Base::Close()

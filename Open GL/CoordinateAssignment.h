@@ -14,7 +14,7 @@ private:
 public:
 	CoordinateAssignment();
 	void Init() override;
-	void Update(Renderer* gRenderer) override;
+	void Update() override;
 	void UpdateImGui() override;
 	void Close() override;
 };

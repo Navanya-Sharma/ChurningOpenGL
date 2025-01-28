@@ -40,16 +40,17 @@ void TransformAssignment::Init()
 	m_texture.Bind();
 }
 
-void TransformAssignment::Update(Renderer* gRenderer)
+void TransformAssignment::Update()
 {
+	Renderer& gRenderer = Renderer::GetRenderer();
 	glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.3f, 0.3f, 0));
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.6f, 0.6f, 1.0f));
 	glm::mat4 rot = glm::rotate(glm::mat4(1.0f), (float)glfwGetTime(), glm::vec3(0, 1, 0));
 	glm::mat4 mvp = trans*scale* rot ;
 	m_shader.SetUniformMat4("u_MVP", mvp);
 
-	gRenderer->EnableBlending();
-	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+	gRenderer.EnableBlending();
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 
 	trans = glm::translate(glm::mat4(1.0f), glm::vec3(-0.3f, -0.3f, 0));
 	scale = glm::scale(glm::mat4(1.0f), glm::vec3(cos(glfwGetTime()), cos(glfwGetTime()), 1.0f));
@@ -57,8 +58,8 @@ void TransformAssignment::Update(Renderer* gRenderer)
 
 	m_shader.SetUniformMat4("u_MVP", mvp);
 
-	gRenderer->EnableBlending();
-	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+	gRenderer.EnableBlending();
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 }
 
 void TransformAssignment::Close()

@@ -19,6 +19,6 @@ private:
 public:
 	ChaosGame();
 	void Init() override;
-	void Update(Renderer* gRenderer) override;
+	void Update() override;
 	void Close() override;
 };

@@ -42,9 +42,10 @@ void TextureAssignment::Init()
 
 }
 
-void TextureAssignment::Update(Renderer* gRenderer)
+void TextureAssignment::Update()
 {
-	gRenderer->Draw(m_vertArr, m_indBuff, m_shader);
+	Renderer& gRenderer = Renderer::GetRenderer();
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 
 }
 

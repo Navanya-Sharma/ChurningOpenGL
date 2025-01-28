@@ -9,4 +9,4 @@ void InitImGui(GLFWwindow* Window);
 
 void Close();
 
-int UpdateImGui(float* color, char SceneName[][32], int TotalScenes, SceneManager* gSceneManager);
+int UpdateImGui(float* color, char SceneName[][32], int TotalScenes);

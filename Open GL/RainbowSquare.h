@@ -16,6 +16,6 @@ private:
 public:
 	RainbowSquare();
 	void Init() override;
-	void Update(Renderer* gRenderer) override;
+	void Update() override;
 	void Close() override;
 };

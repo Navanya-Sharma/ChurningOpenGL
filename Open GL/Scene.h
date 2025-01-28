@@ -6,7 +6,7 @@ class Scene
 {
 public:
 	virtual void Init() = 0;
-	virtual void Update(Renderer* gRenderer) = 0;
+	virtual void Update() = 0;
 	virtual void UpdateImGui() { };
 	virtual void Close() = 0;
 };
@@ -14,7 +14,11 @@ public:
 class SceneManager {
 private:
 	std::unique_ptr<Scene> currScene = nullptr;
+	SceneManager() {};
+	static SceneManager a;
+
 public:
+	inline static SceneManager& GetManager(){ return a; }
 
 	inline bool Init() {
 		if (currScene!=nullptr) { 
@@ -25,8 +29,8 @@ public:
 			return false;
 		}
 	}
-	inline void Update(Renderer* gRenderer) {
-		if (currScene != nullptr) currScene->Update(gRenderer);
+	inline void Update() {
+		if (currScene != nullptr) currScene->Update();
 	}
 	inline void UpdateImGui() {
 		if (currScene != nullptr) currScene->UpdateImGui();
