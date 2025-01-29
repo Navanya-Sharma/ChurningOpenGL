@@ -111,21 +111,30 @@ void CoordinateAssignment::UpdateImGui()
 {
 	ImGui::Text("Coordinate Assignment");
 	static float r = 5.0f, theta=0, alpha=0;
-	ImGui::SliderFloat("Move Side", &theta, 0.0f, 2 * 3.141592);
-	ImGui::SliderFloat("Move Up", &alpha, 0.0f, 2*3.141592);
+	constexpr float halfPI=glm::half_pi<float>();
+
+	ImGui::SliderFloat("Move Side", &theta, 0.0f, 4 * halfPI);
+	ImGui::SliderFloat("Move Up", &alpha, 0.0f, 2*halfPI-0.01f);
 	ImGui::SliderFloat("Radius", &r, 1.0f, 10.0f);
 
-	float x = sin(theta) * cos(alpha) * r;
-	float y =			   sin(alpha) * r;
-	float z = cos(theta) * cos(alpha) * r;	
+	float x = sin(theta) * cos(alpha+halfPI) * r;
+	float y =			   sin(alpha+halfPI) * r;
+	float z = cos(theta) * cos(alpha+halfPI) * r;	
 
-	glm::mat4 proj = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
 	/*glm::mat4 model = glm::rotate(glm::mat4(1.0f), 0.0f, rotAxis);
 	glm::mat4 view = glm::lookAt(glm::vec3(x, y, z),
 								 glm::vec3( 0.0f, 0.0f, 0.0f),
 								 glm::vec3( 0.0f, 1.0f, 0.0f));
 	std::cout << "look at" << std::endl;*/
+	glm::mat4 proj;
+	static bool pres = true;
+	if (ImGui::Button("Ortho/Prespective")) {
+		pres = !pres;
+	}
 	
+	proj = pres ? glm::perspective(glm::radians(45.0f), 1.0f, 1.0f, 100.0f): 
+				  glm::ortho(-2.0f, 2.0f, -2.0f, 2.0f, 1.0f, 100.0f);
+
 	glm::vec3 dir = glm::normalize(glm::vec3(x,y,z)-glm::vec3(0,0,0));
 	glm::vec3 right= glm::normalize(glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), dir));
 	glm::vec3 up = glm::normalize(glm::cross(dir, right));
@@ -139,6 +148,8 @@ void CoordinateAssignment::UpdateImGui()
 	m_shader.SetUniformMat4("uMVP", MVP);
 	Renderer& gRenderer = Renderer::GetRenderer();
 	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
+
+	
 
 	//pitch = aplha ,yaw = theta
 
