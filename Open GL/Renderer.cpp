@@ -33,6 +33,12 @@ void Renderer::EnableBlending()
 	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 }
 
+void Renderer::EnablePointSize(int size)
+{
+	GLCall(glEnable(GL_PROGRAM_POINT_SIZE));
+	GLCall(glPointSize(size));
+}
+
 void Renderer::EnableDepthTest()
 {
 	GLCall(glEnable(GL_DEPTH_TEST));

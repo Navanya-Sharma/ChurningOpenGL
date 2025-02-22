@@ -28,6 +28,9 @@
 #include "ColorSerpenski.h"
 #include "CoordinateAssignment.h"
 #include "CameraAssignment.h"
+#include "LightingAssignment.h"
+#include "LightingMaps.h"
+#include "Sphere.h"
 
 SceneManager SceneManager::a;
 Renderer Renderer::inst;
@@ -46,10 +49,10 @@ int main() {
 	SceneManager& gSceneManager=SceneManager::GetManager();
 
 	float color[4] = { 0.45f, 0.55f, 0.60f, 1.00f };
-	const int TotalScenes = 9;
+	const int TotalScenes = 12;
 	char SceneNames[TotalScenes][32] = { "Rainbow Square", "Model View Projection", "Chaos Game",
 	"ShaderAssignment","TextureAssignment","TransformAssignment","ColorfulSerpenski","CoordinateAssignment",
-	"CameraAssignment"};
+	"CameraAssignment","LightingAssignment","LightingMaps","Sphere"};
 	gSceneManager.ChangeScene(std::make_unique<CoordinateAssignment>());
 
 
@@ -76,6 +79,9 @@ int main() {
 			case 6: gSceneManager.ChangeScene(std::make_unique<ColorSerpenski>()); break;
 			case 7: gSceneManager.ChangeScene(std::make_unique<CoordinateAssignment>()); break;
 			case 8: gSceneManager.ChangeScene(std::make_unique<CameraAssignment>()); break;
+			case 9: gSceneManager.ChangeScene(std::make_unique<LightingAssignment>()); break;
+			case 10: gSceneManager.ChangeScene(std::make_unique<LightingMaps>()); break;
+			case 11: gSceneManager.ChangeScene(std::make_unique<Sphere>()); break;
 			}
 		}
 

@@ -6,7 +6,10 @@ C:\Users\sharm\source\repos\Open GL\Git\Open GL\ChaosGame.cpp;C:\Users\sharm\sou
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\ColorSerpenski.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\ColorSerpenski.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\CoordinateAssignment.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\CoordinateAssignment.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\core.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\core.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\icosphere.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\icosphere.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\IndexBuffer.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\IndexBuffer.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\LightingAssignment.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\LightingAssignment.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\LightingMaps.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\LightingMaps.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\main.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\main.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\ModelViewProjection.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\ModelViewProjection.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\RainbowSqaure old.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\RainbowSqaure old.obj
@@ -23,6 +26,7 @@ C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\stb_image.cpp;C:\Users\sharm
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\RainbowSquare.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\RainbowSquare.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\Shader.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Shader.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\ShaderAssignment.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\ShaderAssignment.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\Sphere.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Sphere.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\Texture.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Texture.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\TextureAssignment.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\TextureAssignment.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\TransformAssignment.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\TransformAssignment.obj

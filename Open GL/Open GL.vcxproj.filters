@@ -127,6 +127,18 @@
     <ClCompile Include="CameraAssignment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LightingAssignment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LightingMaps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icosphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
@@ -1080,6 +1092,18 @@
     <ClInclude Include="CameraAssignment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LightingAssignment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LightingMaps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="icosphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\glm\ext\matrix_clip_space.inl">
@@ -1527,6 +1551,27 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="CameraAssignment.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\LightingAssignmetn.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\LightingAssignmetObject.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\LightingGourd.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\LightingMapsLightSource.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\LightingMapsMain.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\Sphere.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\SphereLightObject.shader">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

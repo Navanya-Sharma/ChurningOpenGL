@@ -140,7 +140,10 @@
     <ClCompile Include="ColorSerpenski.cpp" />
     <ClCompile Include="CoordinateAssignment.cpp" />
     <ClCompile Include="core.cpp" />
+    <ClCompile Include="icosphere.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="LightingAssignment.cpp" />
+    <ClCompile Include="LightingMaps.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelViewProjection.cpp" />
     <ClCompile Include="RainbowSqaure old.cpp" />
@@ -157,6 +160,7 @@
     <ClCompile Include="RainbowSquare.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderAssignment.cpp" />
+    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureAssignment.cpp" />
     <ClCompile Include="TransformAssignment.cpp" />
@@ -171,7 +175,10 @@
     <ClInclude Include="ColorSerpenski.h" />
     <ClInclude Include="CoordinateAssignment.h" />
     <ClInclude Include="core.h" />
+    <ClInclude Include="icosphere.h" />
     <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="LightingAssignment.h" />
+    <ClInclude Include="LightingMaps.h" />
     <ClInclude Include="ModelViewProjection.h" />
     <ClInclude Include="RainbowSquare.h" />
     <ClInclude Include="Renderer.h" />
@@ -476,6 +483,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderAssignment.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureAssignment.h" />
     <ClInclude Include="TransformAssignment.h" />
@@ -627,9 +635,16 @@
     <None Include="res\glm\gtx\vector_angle.inl" />
     <None Include="res\glm\gtx\vector_query.inl" />
     <None Include="res\glm\gtx\wrap.inl" />
+    <None Include="res\LightingAssignmetn.shader" />
+    <None Include="res\LightingAssignmetObject.shader" />
+    <None Include="res\LightingGourd.shader" />
+    <None Include="res\LightingMapsLightSource.shader" />
+    <None Include="res\LightingMapsMain.shader" />
     <None Include="res\MVP.shader" />
     <None Include="res\Rainbow.shader" />
     <None Include="res\ShaderAssignment.shader" />
+    <None Include="res\Sphere.shader" />
+    <None Include="res\SphereLightObject.shader" />
     <None Include="res\TextureAssignment.shader" />
     <None Include="TransformAssignment.shader" />
   </ItemGroup>

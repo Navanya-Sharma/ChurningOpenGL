@@ -10,9 +10,9 @@
 
 Shader::Shader(const std::string& path)
 {
-	ShaderProgramSource src = ParseShader(path);
-	m_RendererID = CreateShader(src.VertexSource, src.FragmentSource, src.CompSource);
 	n_FilePath = path;
+	ShaderProgramSource src = ParseShader(path);
+	m_RendererID = CreateShader(src.VertexSource, src.FragmentSource, src.CompSource, src.GeoSource);
 }
 Shader::~Shader()
 {
@@ -21,7 +21,9 @@ Shader::~Shader()
 
 void Shader::Bind() const
 {
+
 	GLCall(glUseProgram(m_RendererID));
+	// If there is a variable mismatch between in and out of shaders, it gives an invalid operation error
 
 }
 
@@ -41,6 +43,11 @@ void Shader::SetUniform4f(const std::string& name, float v0, float v1, float v2,
 	Bind();
 	GLCall(glUniform4f(GetUniformLocation(name), v0, v1, v2, v3));
 }
+void Shader::SetUniform3f(const std::string& name, float v0, float v1, float v2)
+{
+	Bind();
+	GLCall(glUniform3f(GetUniformLocation(name), v0, v1, v2 ));
+}
 void Shader::SetUniform1fv(const std::string& name, int count, float *data)
 {
 	Bind();
@@ -58,7 +65,7 @@ int Shader::GetUniformLocation(const std::string& name)
 		return m_locationCache[name];
 
 	GLCall(int c = glGetUniformLocation(m_RendererID, name.c_str()));
-	if (c == -1) { std::cout<<"warning: uniform '"+name+"' doesnt exist\n"<<std::endl; }
+	if (c == -1) { std::cout<<n_FilePath+"warning: uniform '"+name+"' doesnt exist\n"<<std::endl; }
 	m_locationCache[name] = c;
 	
 	return c;
@@ -73,11 +80,11 @@ ShaderProgramSource Shader::ParseShader(const std::string& path) {
 		ASSERT(0);
 	}
 	enum class Shadertype {
-		NONE = -1, VERTEX = 0, FRAGMENT = 1, COMPUTE =2
+		NONE = -1, VERTEX = 0, FRAGMENT = 1, COMPUTE =2, GEOMETRY = 3
 	};
 
 	std::string line;
-	std::string ans[3] = { "","",""};
+	std::string ans[4] = { "","","",""};
 	Shadertype type = Shadertype::NONE;
 
 	while (getline(stream, line, '\n')) {
@@ -88,12 +95,14 @@ ShaderProgramSource Shader::ParseShader(const std::string& path) {
 				type = Shadertype::VERTEX;
 			else if (line.find("compute") != std::string::npos)
 				type = Shadertype::COMPUTE;
+			else if (line.find("geometry") != std::string::npos)
+				type = Shadertype::GEOMETRY;
 		}
 		else {
 			ans[(int)type] += line + '\n';
 		}
 	}
-	return { ans[0],ans[1],ans[2]};
+	return { ans[0],ans[1],ans[2],ans[3]};
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source) {
@@ -114,9 +123,11 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 			sh = "Vertex";
 		else if (type == GL_FRAGMENT_SHADER)
 			sh = "Fragment";
-		else
+		else if(type == GL_GEOMETRY_SHADER)
+			sh= "Geometry";
+		else if(type == GL_COMPUTE_SHADER)
 			sh = "Compute";
-		std::cout<<sh+" Shader did not compile"<<std::endl;
+		std::cout<<sh+" Shader did not compile from path"+n_FilePath<<std::endl;
 		printf("%s", message);
 
 		glDeleteShader(id);
@@ -128,9 +139,9 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 }
 
 unsigned int Shader::CreateShader(const std::string& verShade, const std::string& fragShade, 
-	const std::string& CompShade) {
+	const std::string& CompShade, const std::string& GeoShade) {
 	unsigned int pro = glCreateProgram();
-	unsigned int vs,fs,cs;
+	unsigned int vs,fs,cs,gs;
 	if (verShade != "") {
 		vs = CompileShader(GL_VERTEX_SHADER, verShade);
 		glAttachShader(pro, vs);
@@ -143,6 +154,10 @@ unsigned int Shader::CreateShader(const std::string& verShade, const std::string
 		cs = CompileShader(GL_COMPUTE_SHADER, CompShade);
 		glAttachShader(pro, cs);
 	}
+	if (GeoShade != "") {
+		gs = CompileShader(GL_GEOMETRY_SHADER, GeoShade);
+		glAttachShader(pro, gs);
+	}
 
 	glLinkProgram(pro);
 	glValidateProgram(pro);
@@ -150,6 +165,7 @@ unsigned int Shader::CreateShader(const std::string& verShade, const std::string
 	if (verShade != "") glDeleteShader(vs);
 	if (fragShade != "") glDeleteShader(fs);
 	if (CompShade != "") glDeleteShader(cs);
+	if (GeoShade != "") glDeleteShader(gs);
 
 	//glDetachShader(pro, vs);
 	//glDetachShader(pro,fs);

@@ -1,2 +1,4 @@
-﻿  CoordinateAssignment.cpp
+﻿  Sphere.cpp
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\Sphere.cpp(139,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\Sphere.cpp(350,57): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
   Open GL.vcxproj -> C:\Users\sharm\source\repos\Open GL\Git\x64\Debug\Open GL.exe

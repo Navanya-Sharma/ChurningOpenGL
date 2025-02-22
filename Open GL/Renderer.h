@@ -21,6 +21,7 @@ private:
 public:
 	inline static Renderer& GetRenderer() { return inst; };
 	void EnableBlending();
+	void EnablePointSize(int size);
 	void EnableDepthTest();
 	void Draw(VertexArray& va, IndexBuffer& ib, Shader& sh) const;
 	void DrawArray(VertexArray& va, Shader& sh, GLenum type, int count);
