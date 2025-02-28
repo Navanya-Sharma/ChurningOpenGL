@@ -1,5 +1,7 @@
 #include "RainbowSquare.h"
 #include "BufferLayout.h"
+#include "Picking_Texture.h"
+#include <IMGui/imgui.h>
 
 
 void RainbowSquare::UpdateColor()
@@ -70,6 +72,40 @@ void RainbowSquare::Update()
 	m_shader.SetUniform4f("u_color", m_color[0], m_color[1], m_color[2], 1.0f);
 	gRenderer.Draw(m_vertArr,m_indBuff,m_shader);
 }
+
+void RainbowSquare::PickingPhase()
+{
+	m_pickingTexture.EnableWriting();
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	Renderer& gRenderer = Renderer::GetRenderer();
+	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
+
+	if (m_leftMouseButton.IsPressed) {
+		PickingTexture::PixelInfo Pixel = m_pickingTexture.ReadPixel(m_leftMouseButton.x, 1000 - m_leftMouseButton.y - 1);
+		printf("ObjectID: % d, DrawID : % d, PrimitiveID : % d\n", Pixel.ObjectID, Pixel.DrawID, Pixel.PrimID);
+		if (Pixel.ObjectID != 0) {
+			//glDrawElementsBaseVertex(GL_TRIANGLES,3,GL_UNSIGNED_INT, (void*) (sizeof(unsigned int) ()), m_Meshes [DrawIndex].BaseVertex);
+			//Pixel.DrawID; Pixel.PrimID;
+		}
+		m_leftMouseButton.IsPressed = false;
+	}
+	m_pickingTexture.DisableWriting();
+}
+
+void RainbowSquare::UpdateImGui() {
+	if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+		PickingPhase();
+		ImVec2 mousePos = ImGui::GetMousePos();
+		printf("Mouse Position: %f %f\n", mousePos.x, mousePos.y);
+		m_leftMouseButton.IsPressed = true;
+		m_leftMouseButton.x = mousePos.x;
+		m_leftMouseButton.y = mousePos.y;
+		printf("Mouse Position: %d %d\n", m_leftMouseButton.x, m_leftMouseButton.y);
+	}
+}
+
 
 void RainbowSquare::Close()
 {

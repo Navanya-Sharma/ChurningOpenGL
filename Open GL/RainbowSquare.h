@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
-//#include "VertexArray.h"
+#include "Picking_Technique.h"
+#include "Picking_Texture.h"
 //#include "IndexBuffer.h"
 
 class RainbowSquare : public Scene {
@@ -12,10 +13,21 @@ private:
 
 	float m_color[3];
 	void UpdateColor();
+	struct Click {
+		bool IsPressed = false;
+		int x;
+		int y;
+	} m_leftMouseButton;
+	PickingTexture m_pickingTexture;
+	//PickingTechnique m_pickingEffect;
+
+	void PickingPhase();
 
 public:
 	RainbowSquare();
 	void Init() override;
 	void Update() override;
 	void Close() override;
+	void UpdateImGui() override;
+
 };

@@ -16,6 +16,7 @@ public:
 	void Unbind() const;
 
 	void AddBuffer(const VertexBuffer& vb, const BufferLayout& layout );
+	void AddInstanced(const VertexBuffer& vb, const BufferLayout& layout, int offAttri);
 
 	inline unsigned int GetID() { return m_RendererID; }
 };

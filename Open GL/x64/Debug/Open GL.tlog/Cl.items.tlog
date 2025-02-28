@@ -1,17 +1,21 @@
 C:\Softwares\Clibs\glad\src\glad.c;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\glad.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\Base.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Base.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\BigSphere.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\BigSphere.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\BufferLayout.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\BufferLayout.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\CameraAssignment.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\CameraAssignment.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\ChaosGame.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\ChaosGame.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\ColorSerpenski.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\ColorSerpenski.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\CoordinateAssignment.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\CoordinateAssignment.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\core.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\core.obj
-C:\Users\sharm\source\repos\Open GL\Git\Open GL\icosphere.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\icosphere.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\FrustCull.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\FrustCull.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\Fuller.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Fuller.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\GPUInstancing.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\GPUInstancing.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\IndexBuffer.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\IndexBuffer.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\LightingAssignment.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\LightingAssignment.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\LightingMaps.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\LightingMaps.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\main.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\main.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\ModelViewProjection.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\ModelViewProjection.obj
+C:\Users\sharm\source\repos\Open GL\Git\Open GL\Picking_texture.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Picking_texture.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\RainbowSqaure old.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\RainbowSqaure old.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\Renderer.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\Renderer.obj
 C:\Users\sharm\source\repos\Open GL\Git\Open GL\res\glm\detail\glm.cpp;C:\Users\sharm\source\repos\Open GL\Git\Open GL\x64\Debug\glm.obj

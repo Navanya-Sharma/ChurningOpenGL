@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "Texture.h"
+#include "frustCull.h"
 
 class LightingMaps : public Scene {
 private:
@@ -9,6 +10,9 @@ private:
 	IndexBuffer	m_indBuff;
 	Shader	m_shader;
 
+	VertexArray m_PointArr;
+	VertexBuffer m_PointsBuff;
+
 	VertexArray	light_vertArr;
 	VertexBuffer light_vertBuff;
 	IndexBuffer	light_indBuff;
@@ -16,6 +20,10 @@ private:
 
 	Texture diffuseMap;
 	Texture specularMap;
+
+	FrustCull CamFrust;
+
+	void checkPoints();
 
 public:
 	LightingMaps();

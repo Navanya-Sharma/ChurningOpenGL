@@ -17,6 +17,7 @@ VertexBuffer::~VertexBuffer()
 
 void VertexBuffer::SetData(float* data, unsigned int size, unsigned int offset, GLenum type) const
 {
+	Bind();
 	GLCall(glBufferSubData(type,offset,size,data));
 }
 

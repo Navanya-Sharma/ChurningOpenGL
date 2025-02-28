@@ -31,10 +31,11 @@
 #include "LightingAssignment.h"
 #include "LightingMaps.h"
 #include "Sphere.h"
+#include "BigSphere.h"
+#include "GPUInstancing.h"
 
 SceneManager SceneManager::a;
 Renderer Renderer::inst;
-
 
 int main() {
 	const int SCREEN_WIDTH = 1000;
@@ -49,10 +50,10 @@ int main() {
 	SceneManager& gSceneManager=SceneManager::GetManager();
 
 	float color[4] = { 0.45f, 0.55f, 0.60f, 1.00f };
-	const int TotalScenes = 12;
+	const int TotalScenes = 14;
 	char SceneNames[TotalScenes][32] = { "Rainbow Square", "Model View Projection", "Chaos Game",
 	"ShaderAssignment","TextureAssignment","TransformAssignment","ColorfulSerpenski","CoordinateAssignment",
-	"CameraAssignment","LightingAssignment","LightingMaps","Sphere"};
+	"CameraAssignment","LightingAssignment","LightingMaps","Sphere","BigSphere","GPU Instancing"};
 	gSceneManager.ChangeScene(std::make_unique<CoordinateAssignment>());
 
 
@@ -82,9 +83,12 @@ int main() {
 			case 9: gSceneManager.ChangeScene(std::make_unique<LightingAssignment>()); break;
 			case 10: gSceneManager.ChangeScene(std::make_unique<LightingMaps>()); break;
 			case 11: gSceneManager.ChangeScene(std::make_unique<Sphere>()); break;
+			case 12: gSceneManager.ChangeScene(std::make_unique<BigSphere>()); break;
+			case 13: gSceneManager.ChangeScene(std::make_unique<GPUInstancing>()); break;
 			}
 		}
-
+		/*if(m_leftMouseButton.IsPressed)
+			printf("Mouse Position: %d %d\n", m_leftMouseButton.x, m_leftMouseButton.y);*/
 		glfwSwapBuffers(Window);
 		glfwPollEvents();
 	}

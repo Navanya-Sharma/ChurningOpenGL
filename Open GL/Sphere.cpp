@@ -2,7 +2,6 @@
 #include "BufferLayout.h"
 #include "IMGui/imgui.h"
 #include <glm/gtc/type_ptr.hpp>
-#include "icosphere.h"
 
 #include <iomanip>
 #include <vector>

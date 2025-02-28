@@ -24,6 +24,7 @@ public:
 	void EnablePointSize(int size);
 	void EnableDepthTest();
 	void Draw(VertexArray& va, IndexBuffer& ib, Shader& sh) const;
+	void DrawInstance(VertexArray& va, IndexBuffer& ib, Shader& sh,  int count);
 	void DrawArray(VertexArray& va, Shader& sh, GLenum type, int count);
 	void Clear();
 	void ClearDepthBuffer();

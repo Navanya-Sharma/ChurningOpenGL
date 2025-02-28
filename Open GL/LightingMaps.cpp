@@ -8,15 +8,18 @@
 #include "IMGui/imgui_impl_opengl3.h"
 #include <iostream>
 
+
+
 LightingMaps::LightingMaps() :
 	m_vertArr(), m_vertBuff(NULL, 6*6*8* sizeof(float)),
 	m_indBuff(NULL, 36 * sizeof(unsigned int)), 
 	m_shader("res/LightingMapsMain.shader"),
+	m_PointsBuff(NULL, 8 * 3* sizeof(float)),
 	light_vertArr(), light_vertBuff(NULL, 8 * 3 * sizeof(float)),
 	light_indBuff(NULL, 36 * sizeof(unsigned int)), 
 	light_shader("res/LightingMapsLightSource.shader"),
 	diffuseMap("res/container2.png"),
-	specularMap("res/container2_specular.png")
+	specularMap("res/container2_specular.png"), CamFrust(glm::vec3(1.0f), glm::vec3(0.0f), 1.0f, 100.0f)
 {
 }
 
@@ -136,6 +139,18 @@ void LightingMaps::Init()
 	light_vertArr.AddBuffer(light_vertBuff, lay2);
 	light_indBuff.SetData(lightind, 36 * sizeof(unsigned int));
 
+	float s=2.5f;
+	float cube[3 * 8] = {
+		 s, s, s,  s,-s, s, 
+		-s,-s, s, -s, s, s, 
+		 s, s,-s,  s,-s,-s,
+		-s,-s,-s, -s, s,-s,
+	};
+
+	m_PointArr.Bind();
+	m_PointsBuff.SetData(cube, 8 * 3 * sizeof(float));
+	m_vertArr.AddBuffer(m_PointsBuff, lay2);
+
 }
 
 
@@ -164,6 +179,9 @@ void LightingMaps::UpdateImGui()
 
 	
 	proj =glm::perspective(glm::radians(45.0f), 1.0f, 1.0f, 100.0f);
+	
+	CamFrust = FrustCull(-eye, eye, 1.0f, 100.0f);
+	checkPoints();
 
 	glm::mat4 MVP = proj*view;
 	m_shader.SetUniformMat4("uMVP", MVP);
@@ -182,7 +200,6 @@ void LightingMaps::UpdateImGui()
 	Renderer& gRenderer = Renderer::GetRenderer();
 	gRenderer.Draw(m_vertArr, m_indBuff, m_shader);
 
-	
 
 	static float xl=0.0f, yl=2.0f, zl=0.0f;
 
@@ -201,13 +218,37 @@ void LightingMaps::UpdateImGui()
 	light_shader.SetUniformMat4("uMVP", MVP);
 	light_shader.SetUniform4f("uLight", lightColor.x, lightColor.y, lightColor.z, 1.0f);
 	gRenderer.Draw(light_vertArr, light_indBuff, light_shader);
+	MVP = proj * view;
+	light_shader.SetUniformMat4("uMVP", MVP);
+	gRenderer.DrawArray(m_PointArr, light_shader, GL_POINTS, 8);
 
 }
+
+void LightingMaps::checkPoints(){
+	float s = 2.5f;
+	float cube[3 * 8] = {
+		 s, s, s,  s,-s, s,
+		-s,-s, s, -s, s, s,
+		 s, s,-s,  s,-s,-s,
+		-s,-s,-s, -s, s,-s,
+	};
+	int n = 0;
+	for (int i = 0;i < 24;i += 3) {
+		glm::vec3 point(cube[i], cube[i + 1], cube[i + 2]);
+		//printf("Point %d %f %f %f : %d\n", i/3, point.x, point.y, point.z, CamFrust.CheckInside(point));
+		n+=CamFrust.CheckInside(point);
+	}
+	printf("Total Inside: %d\n", n);
+	
+}
+
 void LightingMaps::Update()
 {
 	Renderer& gRenderer = Renderer::GetRenderer();
 	gRenderer.EnableDepthTest();
 	gRenderer.ClearDepthBuffer();
+	gRenderer.EnablePointSize(10);
+	
 	
 }
 

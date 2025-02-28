@@ -134,18 +134,22 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\Softwares\Clibs\glad\src\glad.c" />
     <ClCompile Include="Base.cpp" />
+    <ClCompile Include="BigSphere.cpp" />
     <ClCompile Include="BufferLayout.cpp" />
     <ClCompile Include="CameraAssignment.cpp" />
     <ClCompile Include="ChaosGame.cpp" />
     <ClCompile Include="ColorSerpenski.cpp" />
     <ClCompile Include="CoordinateAssignment.cpp" />
     <ClCompile Include="core.cpp" />
-    <ClCompile Include="icosphere.cpp" />
+    <ClCompile Include="FrustCull.cpp" />
+    <ClCompile Include="Fuller.cpp" />
+    <ClCompile Include="GPUInstancing.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="LightingAssignment.cpp" />
     <ClCompile Include="LightingMaps.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelViewProjection.cpp" />
+    <ClCompile Include="Picking_texture.cpp" />
     <ClCompile Include="RainbowSqaure old.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="res\glm\detail\glm.cpp" />
@@ -169,17 +173,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
+    <ClInclude Include="BigSphere.h" />
     <ClInclude Include="BufferLayout.h" />
     <ClInclude Include="CameraAssignment.h" />
     <ClInclude Include="ChaosGame.h" />
     <ClInclude Include="ColorSerpenski.h" />
     <ClInclude Include="CoordinateAssignment.h" />
     <ClInclude Include="core.h" />
-    <ClInclude Include="icosphere.h" />
+    <ClInclude Include="FrustCull.h" />
+    <ClInclude Include="Fuller.h" />
+    <ClInclude Include="GPUInstancing.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="LightingAssignment.h" />
     <ClInclude Include="LightingMaps.h" />
     <ClInclude Include="ModelViewProjection.h" />
+    <ClInclude Include="Picking_technique.h" />
+    <ClInclude Include="Picking_Texture.h" />
     <ClInclude Include="RainbowSquare.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="res\glm\common.hpp" />
@@ -493,6 +502,8 @@
   <ItemGroup>
     <None Include="CameraAssignment.shader" />
     <None Include="res\Basic.shader" />
+    <None Include="res\BigSphere.shader" />
+    <None Include="res\BigSphereSimple.shader" />
     <None Include="res\ChaosGame.shader" />
     <None Include="res\ColorSerpenski.shader" />
     <None Include="res\Compute.shader" />
@@ -635,6 +646,7 @@
     <None Include="res\glm\gtx\vector_angle.inl" />
     <None Include="res\glm\gtx\vector_query.inl" />
     <None Include="res\glm\gtx\wrap.inl" />
+    <None Include="res\GPUInstancing.shader" />
     <None Include="res\LightingAssignmetn.shader" />
     <None Include="res\LightingAssignmetObject.shader" />
     <None Include="res\LightingGourd.shader" />

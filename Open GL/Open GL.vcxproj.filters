@@ -136,7 +136,19 @@
     <ClCompile Include="Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="icosphere.cpp">
+    <ClCompile Include="BigSphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Picking_texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GPUInstancing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FrustCull.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Fuller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1101,7 +1113,22 @@
     <ClInclude Include="Sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="icosphere.h">
+    <ClInclude Include="Picking_Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Picking_technique.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GPUInstancing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BigSphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FrustCull.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fuller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1572,6 +1599,15 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="res\SphereLightObject.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\GPUInstancing.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\BigSphere.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\BigSphereSimple.shader">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

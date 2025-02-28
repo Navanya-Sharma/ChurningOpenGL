@@ -63,8 +63,6 @@ void MakeFuller(vert v0, vert v1, vert v2, int depth){
 	vert v01 = MidVert(v0,v1);
 	vert v12 = MidVert(v1,v2);
 	vert v20 = MidVert(v2,v0);
-	
-
 }
 
 void main()

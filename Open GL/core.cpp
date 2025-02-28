@@ -24,14 +24,18 @@ GLFWwindow* Init(int Width, int Height)
 	}
 
 	glfwMakeContextCurrent(win);
-	glfwSwapInterval(2);
+	glfwSwapInterval(1);
 
+	
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 		printf("GLAD not initialized");
 		return nullptr;
 	}
 	return win;
 }
+
+
+
 
 void InitImGui(GLFWwindow* Window) {
 	IMGUI_CHECKVERSION();
@@ -98,7 +102,7 @@ int UpdateImGui(float* color, char SceneName[][32], int TotalScenes) {
 		}
 	}
 
-	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+	ImGui::Text("Application average %.1f FPS (%.3f ms/frame) ", io.Framerate, 1000.0f / io.Framerate);
 	
 	
 
