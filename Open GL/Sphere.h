@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include "Fuller.h"
 #include "glm/gtc/matrix_transform.hpp"
 
 class Sphere : public Scene {
@@ -12,6 +13,8 @@ private:
 	glm::mat4x4 proj;
 	glm::mat4x4 view;
 	glm::vec3 lightColor;
+	
+	Fuller ico;
 
 	void CameraImGui();
 	void LightImGui();

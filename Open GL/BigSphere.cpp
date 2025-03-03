@@ -108,15 +108,15 @@ BigSphere::BigSphere() :
     vertArr2(), vertBuff2{ {nullptr, 100 * 1092 * sizeof(float)}, {nullptr, 100 * 1092 * sizeof(float)},
                      {nullptr, 100 * 1092 * sizeof(float)}, {nullptr, 100 * 1092 * sizeof(float)},
                      {nullptr, 100 * 1092 * sizeof(float)}, {nullptr, 100 * 1092 * sizeof(float)},
-                     {nullptr, 100 * 1092 * sizeof(float)}, {nullptr, 100 * 1092 * sizeof(float)},
-                     {nullptr, 100 * 1092 * sizeof(float)}, {nullptr, 100 * 1092 * sizeof(float)}, {nullptr, 1000 * 1092 * sizeof(float)} },
+                     {nullptr, 100 * 1092 * sizeof(float)}, {nullptr, 100 * 1092 * sizeof(float)},{nullptr, 100 * 1092 * sizeof(float)},
+                     {nullptr, 100 * 1092 * sizeof(float)}, {nullptr, 1000 * 1092 * sizeof(float)}, {nullptr, 100 * 1092 * sizeof(float)} },
     m_PointsBuff(NULL, 1331 * 3 * sizeof(float)),
     instBuff(nullptr,3*1000*sizeof(float)),
     indBuff2{ {nullptr, 100 * 960 * sizeof(unsigned int)}, {nullptr, 100 * 960 * sizeof(unsigned int)},
               {nullptr, 100 * 960 * sizeof(unsigned int)}, {nullptr, 100 * 960 * sizeof(unsigned int)},
               {nullptr, 100 * 960 * sizeof(unsigned int)}, {nullptr, 100 * 960 * sizeof(unsigned int)},
-              {nullptr, 100 * 960 * sizeof(unsigned int)}, {nullptr, 100 * 960 * sizeof(unsigned int)},
-              {nullptr, 100 * 960 * sizeof(unsigned int)}, {nullptr, 100 * 960 * sizeof(unsigned int)}, {nullptr, 1000 * 960 * sizeof(unsigned int)} },
+              {nullptr, 100 * 960 * sizeof(unsigned int)}, {nullptr, 100 * 960 * sizeof(unsigned int)},{nullptr, 100 * 960 * sizeof(unsigned int)},
+              {nullptr, 100 * 960 * sizeof(unsigned int)}, {nullptr, 1000 * 960 * sizeof(unsigned int)}, {nullptr, 100 * 960 * sizeof(unsigned int)} },
     m_shader("res/BigSphere.shader"),simple("res/BigSphereSimple.Shader"), light_shader("res/SphereLightObject.shader"),
     proj(1.0f), viewPos(0.0f), lightColor(1.0f, 1.0f, 1.0f), ico2(2), CamFrust(glm::vec3(1.0f), glm::vec3(0.0f), 1.0f, 100.0f)
 {
@@ -135,6 +135,29 @@ void BigSphere::Init()
     unsigned int iSize = ico2.getIndSize() * sizeof(unsigned int);
     unsigned int vSize = ico2.getVertSize() * sizeof(float);
     unsigned int indOffset = ico2.getVertSize()/6;
+
+    //Instancing
+    /*
+    vertArr2[11].Bind();
+    vertBuff2[11].SetData(ico2.getVertData(), vSize);
+    indBuff2[11].SetData(ico2.getIndData(), iSize);
+    vertArr2[11].AddBuffer(vertBuff2[11], layout);
+    
+    float offset[1000 * 3];
+    int id = 0;
+
+    for (int i = 0;i < 10;i++) {
+        for (int j = 0;j < 10;j++) {
+            for (int k = 0;k < 10;k++) {
+                offset[id++] = (float)(i - 5) / 5 + 0.1;
+                offset[id++] = (float)(j - 5) / 5 + 0.1;
+                offset[id++] = (float)(k - 5) / 5 + 0.1;
+            }
+        }
+    }
+    
+    instBuff.SetData(offset, 1000 * 3 * sizeof(float));
+    vertArr2[11].AddInstanced(instBuff, instlay, 2);*/
     
     //vector of all 1000 points
     std::vector<glm::vec3> Points;
@@ -142,17 +165,22 @@ void BigSphere::Init()
     vertArr2[10].Bind();
     //The Code generate a Sphere and then a 10x10x10 Spheres in the space.
     //I have tried to have 10 different materials and also a simple version with one material but not much changed.
+    float offset[1000 * 3];
+    int id = 0;
+    
     for (int i = 0;i < 10;i++) {
         for (int j = 0;j < 10;j++) {
             for (int k = 0;k < 10;k++) {
                 Points.push_back(glm::vec3(((float)(i-5) / 5 + 0.1), ((float)(j-5) / 5 + 0.1), ((float)(k-5) / 5 + 0.1)));
                 glm::vec3 p = Points.back();
+                offset[id++]= p.x;
+                offset[id++]= p.y;
+                offset[id++]= p.z;
                 ico2.translate(p.x, p.y, p.z);
                 indBuff2[10].SetData(ico2.getIndData(), iSize, (i*100+j*10+k) * iSize);
                 vertBuff2[10].SetData(ico2.getVertData(), vSize, (i * 100 + j * 10 + k) * vSize);
                 ico2.AddIndex(indOffset);
                 ico2.translate(-p.x, -p.y, -p.z);
-
             }
         }
     }
@@ -161,7 +189,7 @@ void BigSphere::Init()
     ico2.AddIndex(indOffset * -1000);
 
     //Using it to generate different materials. So for 10 materials there are randomly alloted points in the space
-    //and the sphere is rendered at those points with different materials
+    // and the sphere is rendered at those points with different materials
     vertArr2[0].Bind();
     random_shuffle(Points.begin(), Points.end());
     for (int i = 0;i<Points.size();i++) {
@@ -200,8 +228,8 @@ void BigSphere::Init()
 
 void BigSphere::CameraImGui() {
    
-
     constexpr float halfPI = glm::half_pi<float>();
+    
     static float r = 5.0f, theta = 2*halfPI, alpha = halfPI;
 
     ImGui::SliderFloat("Move Side", &theta, 0.0f, 4 * halfPI);
@@ -262,12 +290,14 @@ void BigSphere::Update()
     gRenderer.Clear();
     gRenderer.EnableDepthTest();
     gRenderer.ClearDepthBuffer();
+    GLCall(glClear( GL_STENCIL_BUFFER_BIT));
     //gRenderer.EnablePointSize(10);
+    float s = 4.0;//increase this to 1,2,4,6,8,10 to increase the spheres
     //Face Culling
     GLCall(glEnable(GL_CULL_FACE));
     GLCall(glCullFace(GL_BACK));
     CamFrust = FrustCull(-viewPos, viewPos, 1.0f, 30.0f);
-    float s = 4.0;
+    
 
     //Depth Culling
     GLCall(glDepthMask(true));
@@ -279,35 +309,35 @@ void BigSphere::Update()
     GLCall(glDepthMask(true));
     GLCall(glDepthFunc(GL_LESS));
     
-    SimpleFrustRender(glm::vec3(-s, -s, s), s*2, 3);
-
+    GLCall(glEnable(GL_POLYGON_OFFSET_FILL));
+    GLCall(glPolygonOffset(1.0f, 1.0f));
+    FrustRender(glm::vec3(-s, -s, s), s*2, 3,true);
     // second )pass
     GLCall(glColorMask(true, true, true, true));
     GLCall(glDepthMask(false));
     GLCall(glDepthFunc(GL_EQUAL));
-    FrustRender(glm::vec3(-s, -s, s), s*2, 3);
-   /*  glm::mat4x4 view = glm::lookAt(viewPos,
+    FrustRender(glm::vec3(-s, -s, s), s*2, 3,false);
+    /* Instancing
+    glm::mat4x4 view = glm::lookAt(viewPos,
         glm::vec3(0.0f, 0.0f, 0.0f),
         glm::vec3(0.0f, 1.0f, 0.0f));
 
-    glm::mat4 MVP = proj * view;
-    m_shader.SetUniformMat4("uMVP", MVP);
-    m_shader.SetUniformMat4("uModel", glm::mat4x4(1.0f));
-
-    Material mat = materials[10];
+    Material mat = materials[5];
     float matarr[10] = { mat.ambient.x,  mat.ambient.y, mat.ambient.z,
                             mat.diffuse.x,  mat.diffuse.y, mat.diffuse.z,
                             mat.specular.x, mat.specular.y, mat.specular.z,mat.shine };
     m_shader.SetUniform1fv("uMatArr", 10, matarr);
-    gRenderer.Draw(vertArr2[10], indBuff2[10], m_shader);
-    //Render(glm::vec3(-1, -1, 1), 2, 3);
+    glm::mat4 MVP = proj * view ;
+    m_shader.SetUniformMat4("uMVP", MVP);
+    m_shader.SetUniformMat4("uModel", glm::mat4x4(1.0f));
+
+    gRenderer.DrawInstance(vertArr2[11], indBuff2[11], m_shader,1000);*/
    
-    gRenderer.DrawInstance(vertArr2[10], indBuff2[10], m_shader,1000);*/
 }
 //FrustRender Does Frustrum Culling with an Octree Structure. It checks if the 8 points of the cube are inside the frustum
 //If all 8 points are inside the frustum then it renders the cube. If not then it checks for the 8 sub cubes of the cube
 //and repeats the process. If the depth is 0 then it renders the cube if at least 4 points are inside
-void BigSphere::FrustRender(glm::vec3 BotLeftF, float dis, int depth)
+void BigSphere::FrustRender(glm::vec3 BotLeftF, float dis, int depth, bool s)
 {
     
     bool inn[8];
@@ -324,7 +354,8 @@ void BigSphere::FrustRender(glm::vec3 BotLeftF, float dis, int depth)
     if (depth == 0) {
         if (sum>=4) {
             //printf("Depth 0 Point: %f, %f, %f - %f\n", BotLeftF.x, BotLeftF.y, BotLeftF.z, dis);
-            Render(BotLeftF, dis, depth);
+            
+                Render(BotLeftF, dis, depth,s);
            
         } 
         return;
@@ -332,62 +363,23 @@ void BigSphere::FrustRender(glm::vec3 BotLeftF, float dis, int depth)
     if (sum==8) {
         //printf("ALL INN");
         //printf(": %f, %f, %f - %f\n", BotLeftF.x, BotLeftF.y, BotLeftF.z, dis);
-        Render(BotLeftF, dis, depth);
+        
+			Render(BotLeftF, dis, depth,s);
     }
     else {
-        FrustRender(BotLeftF, dis / 2, depth - 1);
-        FrustRender(BotLeftF + glm::vec3(dis / 2, 0.0f, 0.0f), dis / 2, depth - 1); 
-        FrustRender(BotLeftF + glm::vec3(dis / 2, dis / 2, 0.0f), dis / 2, depth - 1); 
-        FrustRender(BotLeftF + glm::vec3(0.0f, dis / 2, 0.0f), dis / 2, depth - 1); 
-        FrustRender(BotLeftF + glm::vec3(0.0f, 0.0f, -dis / 2), dis / 2, depth - 1); 
-        FrustRender(BotLeftF + glm::vec3(dis / 2, 0.0f, -dis / 2), dis / 2, depth - 1); 
-        FrustRender(BotLeftF + glm::vec3(dis / 2, dis / 2,-dis / 2), dis / 2, depth - 1); 
-        FrustRender(BotLeftF + glm::vec3(0.0f, dis / 2,-dis / 2), dis / 2, depth - 1); 
+        FrustRender(BotLeftF, dis / 2, depth - 1,s);
+        FrustRender(BotLeftF + glm::vec3(dis / 2, 0.0f, 0.0f), dis / 2, depth - 1,s); 
+        FrustRender(BotLeftF + glm::vec3(dis / 2, dis / 2, 0.0f), dis / 2, depth - 1,s); 
+        FrustRender(BotLeftF + glm::vec3(0.0f, dis / 2, 0.0f), dis / 2, depth - 1,s); 
+        FrustRender(BotLeftF + glm::vec3(0.0f, 0.0f, -dis / 2), dis / 2, depth - 1,s); 
+        FrustRender(BotLeftF + glm::vec3(dis / 2, 0.0f, -dis / 2), dis / 2, depth - 1,s); 
+        FrustRender(BotLeftF + glm::vec3(dis / 2, dis / 2,-dis / 2), dis / 2, depth - 1,s); 
+        FrustRender(BotLeftF + glm::vec3(0.0f, dis / 2,-dis / 2), dis / 2, depth - 1,s); 
     }
 
 
 }
-void BigSphere::SimpleFrustRender(glm::vec3 BotLeftF, float dis, int depth)
-{
-
-    bool inn[8];
-    inn[0] = CamFrust.CheckInside(BotLeftF);
-    inn[1] = CamFrust.CheckInside(BotLeftF + glm::vec3(dis, 0.0f, 0.0f));
-    inn[2] = CamFrust.CheckInside(BotLeftF + glm::vec3(dis, dis, 0.0f));
-    inn[3] = CamFrust.CheckInside(BotLeftF + glm::vec3(0.0f, dis, 0.0f));
-    inn[4] = CamFrust.CheckInside(BotLeftF + glm::vec3(0.0f, 0.0f, -dis));
-    inn[5] = CamFrust.CheckInside(BotLeftF + glm::vec3(dis, 0.0f, -dis));
-    inn[6] = CamFrust.CheckInside(BotLeftF + glm::vec3(dis, dis, -dis));
-    inn[7] = CamFrust.CheckInside(BotLeftF + glm::vec3(0.0f, dis, -dis));
-
-    int sum = inn[0] + inn[1] + inn[2] + inn[3] + inn[4] + inn[5] + inn[6] + inn[7];
-    if (depth == 0) {
-        if (sum >= 4) {
-            //printf("Depth 0 Point: %f, %f, %f - %f\n", BotLeftF.x, BotLeftF.y, BotLeftF.z, dis);
-            SimpleRender(BotLeftF, dis, depth);
-
-        }
-        return;
-    }
-    if (sum == 8) {
-        //printf("ALL INN");
-        //printf(": %f, %f, %f - %f\n", BotLeftF.x, BotLeftF.y, BotLeftF.z, dis);
-        SimpleRender(BotLeftF, dis, depth);
-    }
-    else {
-        SimpleFrustRender(BotLeftF, dis / 2, depth - 1);
-        SimpleFrustRender(BotLeftF + glm::vec3(dis / 2, 0.0f, 0.0f), dis / 2, depth - 1);
-        SimpleFrustRender(BotLeftF + glm::vec3(dis / 2, dis / 2, 0.0f), dis / 2, depth - 1);
-        SimpleFrustRender(BotLeftF + glm::vec3(0.0f, dis / 2, 0.0f), dis / 2, depth - 1);
-        SimpleFrustRender(BotLeftF + glm::vec3(0.0f, 0.0f, -dis / 2), dis / 2, depth - 1);
-        SimpleFrustRender(BotLeftF + glm::vec3(dis / 2, 0.0f, -dis / 2), dis / 2, depth - 1);
-        SimpleFrustRender(BotLeftF + glm::vec3(dis / 2, dis / 2, -dis / 2), dis / 2, depth - 1);
-        SimpleFrustRender(BotLeftF + glm::vec3(0.0f, dis / 2, -dis / 2), dis / 2, depth - 1);
-    }
-
-
-}
-void BigSphere::Render(glm::vec3 BotLeftF, float dis, int depth)
+void BigSphere::Render(glm::vec3 BotLeftF, float dis, int depth, bool s)
 {
     Renderer& gRenderer = Renderer::GetRenderer();
 
@@ -395,88 +387,67 @@ void BigSphere::Render(glm::vec3 BotLeftF, float dis, int depth)
         glm::vec3(0.0f, 0.0f, 0.0f),
         glm::vec3(0.0f, 1.0f, 0.0f));
 
-    Material mat = materials[5];
-    float matarr[10] = { mat.ambient.x,  mat.ambient.y, mat.ambient.z,
-                            mat.diffuse.x,  mat.diffuse.y, mat.diffuse.z,
-                            mat.specular.x, mat.specular.y, mat.specular.z,mat.shine };
-    m_shader.SetUniform1fv("uMatArr", 10, matarr);
 
-    for (float z = BotLeftF.z-1;z > BotLeftF.z - dis; z -= 2) {
-        for (float y = BotLeftF.y+1; y < BotLeftF.y + dis; y += 2) {
-            for (float x = BotLeftF.x+1; x < BotLeftF.x + dis; x += 2) {
-               
-                glm::mat4 model=glm::translate(glm::mat4x4(1.0f), glm::vec3(x, y, z));
-                glm::mat4 MVP = proj * view* model;
+    for (float z = BotLeftF.z - 1;z > BotLeftF.z - dis; z -= 2) {
+        for (float y = BotLeftF.y + 1; y < BotLeftF.y + dis; y += 2) {
+            for (float x = BotLeftF.x + 1; x < BotLeftF.x + dis; x += 2) {
+
+                glm::mat4 model = glm::translate(glm::mat4x4(1.0f), glm::vec3(x, y, z));
+                glm::mat4 MVP = proj * view * model;
+                if (!s) {
                 m_shader.SetUniformMat4("uMVP", MVP);
                 m_shader.SetUniformMat4("uModel", model);
-                gRenderer.Draw(vertArr2[10], indBuff2[10], m_shader);
-
-                /*for (int i = 0; i < 10; i++) {
-
+                for (int i = 0; i < 10; i++) {
+                 
                     Material mat = materials[i];
                     float matarr[10] = { mat.ambient.x,  mat.ambient.y, mat.ambient.z,
                                             mat.diffuse.x,  mat.diffuse.y, mat.diffuse.z,
                                             mat.specular.x, mat.specular.y, mat.specular.z,mat.shine };
                     m_shader.SetUniform1fv("uMatArr", 10, matarr);
-                   
+
                     gRenderer.Draw(vertArr2[i], indBuff2[i], m_shader);
-                    
-                }*/
-            }
-        }
-    }
 
+                }
+                }
+                else {
+                    simple.SetUniformMat4("uMVP", MVP);
+                    for (int i = 0; i < 10; i++) {
+                        gRenderer.Draw(vertArr2[i], indBuff2[i], simple);
 
-   
-}
+                    }
+                 }
+                /*gRenderer.Draw(vertArr2[10], indBuff2[10], m_shader);*/
 
-//Simple Render and Simple Furst are for the first depth pass with a simple bare minimun shader
-void BigSphere::SimpleRender(glm::vec3 BotLeftF, float dis, int depth)
-{
-    Renderer& gRenderer = Renderer::GetRenderer();
-
-    glm::mat4x4 view = glm::lookAt(viewPos,
-        glm::vec3(0.0f, 0.0f, 0.0f),
-        glm::vec3(0.0f, 1.0f, 0.0f));
-   
-    for (float z = BotLeftF.z - 1;z > BotLeftF.z - dis; z -= 2) {
-        for (float y = BotLeftF.y + 1; y < BotLeftF.y + dis; y += 2) {
-            for (float x = BotLeftF.x + 1; x < BotLeftF.x + dis; x += 2) {
-                glm::mat4 model = glm::translate(glm::mat4x4(1.0f), glm::vec3(x, y, z));
-                glm::mat4 MVP = proj * view * model;
-                simple.SetUniformMat4("uMVP", MVP);
                 
-                gRenderer.Draw(vertArr2[10], indBuff2[10], simple);
             }
         }
     }
+
+
+
 }
 
-// Remove testing function - Not used anywhere. Just to check a given list of points are in the Furstrum or not!
-void BigSphere::checkPoints() {
-   
-    int n = 0;
-    for (int x = -10; x <= 10; x += 2) {
-        for (int y = -10; y <= 10; y += 2) {
-            for (int z = -10; z <= 10; z += 2) {
-                glm::vec3 point(x, y, z);
-                //printf("Point %d %f %f %f : %d\n", i/3, point.x, point.y, point.z, CamFrust.CheckInside(point));
-                n += CamFrust.CheckInside(point);
 
-            }
-        }
+
+
+void BigSphere::Close(){
+    for (int i = 0;i < 12;i++) {
+        vertArr2[i].~VertexArray();
+        vertBuff2[i].~VertexBuffer();
+        indBuff2[i].~IndexBuffer();
     }
-    printf("Total Inside: %d\n", n);
-
-}
-
-void BigSphere::Close()
-    {
-	vertArr2[0].~VertexArray();
-	vertBuff2[0].~VertexBuffer();
-	indBuff2[0].~IndexBuffer();
-	m_shader.~Shader();
-    Renderer& gRenderer = Renderer::GetRenderer();
+    instBuff.~VertexBuffer();
+    m_shader.~Shader();
+    simple.~Shader();
+    light_shader.~Shader();
+    ico2.~Fuller();
+    
+    GLCall(glDepthFunc(GL_LESS));      // Reset depth test function to default
+    GLCall(glDepthMask(true));         // Allow writing to depth buffer
     GLCall(glDisable(GL_DEPTH_TEST));
+    GLCall(glDisable(GL_CULL_FACE));   // Disable face culling if no longer needed
+    GLCall(glColorMask(true, true, true, true)); // Enable all color channels
+    
+        
 }
 

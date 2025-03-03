@@ -25,12 +25,6 @@ FrustCull::FrustCull(glm::vec3 front, glm::vec3 pos, float near, float far)
 
 bool FrustCull::CheckInside(glm::vec3 point)
 {
-	/*printf("FrontDot %f\n", glm::dot(point - Front.Point, Front.Normal));
-	printf("BackDot %f\n", glm::dot(point - Back.Point, Back.Normal));
-	printf("TopDot %f\n", glm::dot(point - Top.Point, Top.Normal));
-	printf("BottomDot %f\n", glm::dot(point - Bottom.Point, Bottom.Normal));
-	printf("RightDot %f\n", glm::dot(point - Right.Point, Right.Normal));
-	printf("LeftDot %f\n", glm::dot(point - Left.Point, Left.Normal));*/
 	if (glm::dot(point - Front.Point, Front.Normal) < 0.0f) return false;
 	if (glm::dot(point - Back.Point, Back.Normal) < 0.0f) return false;
 	if (glm::dot(point - Top.Point, Top.Normal) < 0.0f) return false;

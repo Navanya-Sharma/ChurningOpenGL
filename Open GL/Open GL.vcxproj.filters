@@ -151,6 +151,9 @@
     <ClCompile Include="Fuller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Spheree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
@@ -1129,6 +1132,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Fuller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spheree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

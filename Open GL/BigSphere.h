@@ -7,10 +7,10 @@
 class BigSphere : public Scene {
 private:
 	
-	VertexArray	vertArr2[11];
-	VertexBuffer vertBuff2[11];
+	VertexArray	vertArr2[12];
+	VertexBuffer vertBuff2[12];
 	VertexBuffer instBuff;
-	IndexBuffer	indBuff2[11];
+	IndexBuffer	indBuff2[12];
 
 	VertexArray m_PointArr;
 	VertexBuffer m_PointsBuff;
@@ -34,12 +34,11 @@ private:
 	};
 	static const Material materials[15];
 
+
 	FrustCull CamFrust;
-	void FrustRender(glm::vec3 BotLeftF, float dis, int depth);
-	void SimpleFrustRender(glm::vec3 BotLeftF, float dis, int depth);
-	void Render(glm::vec3 BotLeftF, float dis, int depth);
-	void SimpleRender(glm::vec3 BotLeftF, float dis, int depth);
-	void checkPoints();
+	void FrustRender(glm::vec3 BotLeftF, float dis, int depth, bool s);
+	void Render(glm::vec3 BotLeftF, float dis, int depth, bool s);
+
 
 public:
 	BigSphere();

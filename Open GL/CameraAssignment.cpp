@@ -65,17 +65,22 @@ void CameraAssignment::Init()
 
 void CameraAssignment::UpdateImGui()
 {
-	ImGui::Text("Camera Assignment");
+	ImGui::Text("Camera Assignment: \nMove the mouse to the center \n of the screen and click on it.\nUse WASD to move");
 	static float r = 5.0f, theta=180.0f, alpha=0, speed=0.05f,sens=0.05f;
 	static ImVec2 lastMousePos(500,500);
+	static bool once = false;
 	
 	ImGuiIO& io = ImGui::GetIO();
-	float deltaX = io.MousePos.x - lastMousePos.x;
-	float deltaY = io.MousePos.y-lastMousePos.y;  
-	lastMousePos = io.MousePos;
+	if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) once = true;
+	
+	if(once){
+		float deltaX = io.MousePos.x - lastMousePos.x;
+		float deltaY = io.MousePos.y - lastMousePos.y;
+		lastMousePos = io.MousePos;
 
-	theta += deltaX * sens;
-	alpha += deltaY * sens;
+		theta += deltaX * sens;
+		alpha += deltaY * sens;
+	}
 	
 	float x = sin(glm::radians(theta)) * cos(glm::radians(alpha)) * r;
 	float y = sin(glm::radians(alpha)) * r;

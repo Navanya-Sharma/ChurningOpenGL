@@ -19,9 +19,9 @@ struct Vertex {
 constexpr float M_PI = glm::pi<float>();
 
 Sphere::Sphere() :
-	m_vertArr(), m_vertBuff(NULL, 5000 * sizeof(float)),
+	m_vertArr(), m_vertBuff(NULL, 5200 * sizeof(float)),
 	m_indBuff(NULL, 5000 * sizeof(unsigned int)), m_shader("res/Sphere.shader"),
-    light_shader("res/SphereLightObject.shader"), proj(1.0f), view(1.0f), lightColor(1.0f, 1.0f, 1.0f)
+    light_shader("res/SphereLightObject.shader"), proj(1.0f), view(1.0f), lightColor(1.0f, 1.0f, 1.0f),ico(3)
 {
 }
 
@@ -325,17 +325,6 @@ void Sphere::Init()
     vertices[i1 + 4] = 0;
     vertices[i1 + 5] = -radius;
 
-        for (size_t i = 0; i < 12*6; i += 6) {
-    std::cout << std::setprecision(5);
-            std::cout << i/6 <<"Vertex: ("
-                << vertices[i] << ", "
-                << vertices[i + 1] << ", "
-                << vertices[i + 2] << ") Norm("
-              
-                << vertices[i + 3] << ", "
-                << vertices[i + 4] << ", "
-                << vertices[i + 5] << ")\n";
-        }
     
     std::cout<<vertices.size();
     unsigned int indices[20 * 3] = {
@@ -347,6 +336,8 @@ void Sphere::Init()
 
     m_indBuff.SetData(indices, 60 * sizeof(unsigned int));
     m_vertBuff.SetData(vertices.data(), vertices.size() * sizeof(float));
+    //m_indBuff.SetData(ico.getIndData(), ico.getIndSize() * sizeof(unsigned int));
+    //m_vertBuff.SetData(ico.getVertData(), ico.getVertSize() * sizeof(float));
 
     BufferLayout layout;
     layout.Push<float>(3);

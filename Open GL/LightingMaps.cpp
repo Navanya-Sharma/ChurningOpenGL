@@ -235,10 +235,9 @@ void LightingMaps::checkPoints(){
 	int n = 0;
 	for (int i = 0;i < 24;i += 3) {
 		glm::vec3 point(cube[i], cube[i + 1], cube[i + 2]);
-		//printf("Point %d %f %f %f : %d\n", i/3, point.x, point.y, point.z, CamFrust.CheckInside(point));
-		n+=CamFrust.CheckInside(point);
+		
 	}
-	printf("Total Inside: %d\n", n);
+	
 	
 }
 

@@ -65,6 +65,7 @@ void ChaosGame::Update()
 	// gRenderer->Draw(m_pointsArr, m_indBuff, m_shader,GL_POINTS);
 	m_pointsBuff.Bind(GL_ARRAY_BUFFER);
 	m_pointsArr.Bind();
+	gRenderer.EnablePointSize(2);
 	GLCall(glDrawArrays(GL_POINTS, 0, 10000 * 10));
 
 

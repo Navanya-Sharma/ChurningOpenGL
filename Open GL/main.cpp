@@ -1,3 +1,7 @@
+#ifdef _MSC_VER
+#pragma comment(linker, "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+#endif
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -31,6 +35,7 @@
 #include "LightingAssignment.h"
 #include "LightingMaps.h"
 #include "Sphere.h"
+#include "Spheree.h"
 #include "BigSphere.h"
 #include "GPUInstancing.h"
 
@@ -50,10 +55,10 @@ int main() {
 	SceneManager& gSceneManager=SceneManager::GetManager();
 
 	float color[4] = { 0.45f, 0.55f, 0.60f, 1.00f };
-	const int TotalScenes = 14;
+	const int TotalScenes = 15;
 	char SceneNames[TotalScenes][32] = { "Rainbow Square", "Model View Projection", "Chaos Game",
 	"ShaderAssignment","TextureAssignment","TransformAssignment","ColorfulSerpenski","CoordinateAssignment",
-	"CameraAssignment","LightingAssignment","LightingMaps","Sphere","BigSphere","GPU Instancing"};
+	"CameraAssignment","LightingAssignment","LightingMaps","GPU Instancing","Sphere - Geometry Shader","Single Sphere","Million Sphere"};
 	gSceneManager.ChangeScene(std::make_unique<CoordinateAssignment>());
 
 
@@ -82,9 +87,10 @@ int main() {
 			case 8: gSceneManager.ChangeScene(std::make_unique<CameraAssignment>()); break;
 			case 9: gSceneManager.ChangeScene(std::make_unique<LightingAssignment>()); break;
 			case 10: gSceneManager.ChangeScene(std::make_unique<LightingMaps>()); break;
-			case 11: gSceneManager.ChangeScene(std::make_unique<Sphere>()); break;
-			case 12: gSceneManager.ChangeScene(std::make_unique<BigSphere>()); break;
-			case 13: gSceneManager.ChangeScene(std::make_unique<GPUInstancing>()); break;
+			case 11: gSceneManager.ChangeScene(std::make_unique<GPUInstancing>()); break;
+			case 12: gSceneManager.ChangeScene(std::make_unique<Sphere>()); break;
+			case 13: gSceneManager.ChangeScene(std::make_unique<Spheree>()); break;
+			case 14: gSceneManager.ChangeScene(std::make_unique<BigSphere>()); break;
 			}
 		}
 		/*if(m_leftMouseButton.IsPressed)

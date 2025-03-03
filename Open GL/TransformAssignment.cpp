@@ -64,6 +64,7 @@ void TransformAssignment::Update()
 
 void TransformAssignment::Close()
 {
+	GLCall(glDisable(GL_BLEND)); 
 	m_vertArr.~VertexArray();
 	m_vertBuff.~VertexBuffer();
 	m_shader.~Shader();
