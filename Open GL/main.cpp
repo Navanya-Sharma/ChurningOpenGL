@@ -1,6 +1,6 @@
-#ifdef _MSC_VER
-#pragma comment(linker, "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
-#endif
+//#ifdef _MSC_VER
+//#pragma comment(linker, "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+//#endif
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -66,7 +66,6 @@ int main() {
 	{
 		gRenderer.SetClearColor(color);
 		gRenderer.Clear();
-
 
 		static int SceneNo;
 		SceneNo = UpdateImGui(color, SceneNames, TotalScenes);

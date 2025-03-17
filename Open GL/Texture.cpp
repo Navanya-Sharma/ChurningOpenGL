@@ -51,7 +51,9 @@ void Texture::Unbind()
 {
 	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
-void Texture::Write(float* values)
+void Texture::Write(unsigned int* values)
 {
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RG32F, m_Width, m_Height, 0, GL_RG, GL_FLOAT, values);
+	Bind();
+	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_R32UI, m_Width, m_Height, 0, GL_RED_INTEGER, GL_UNSIGNED_INT, values));
+	GLCall(glBindImageTexture(0, m_RendererID, 0, GL_FALSE, 0, GL_READ_WRITE, GL_R32UI));
 }
