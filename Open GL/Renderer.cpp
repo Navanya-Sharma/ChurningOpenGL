@@ -82,3 +82,13 @@ void Renderer::SetClearColor(float* color)
 {
 	GLCall(glClearColor(color[0], color[1], color[2], color[3]));
 }
+
+float Renderer::GetDeltaTime()
+{
+	return DeltaTime;
+}
+
+void Renderer::SetDeltaTime(float time)
+{
+	DeltaTime = time;
+}

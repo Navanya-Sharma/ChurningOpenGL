@@ -15,6 +15,7 @@ bool GLLogCall(const char* function, const char* file, int line);
 
 class Renderer {
 private:
+	float DeltaTime;
 	static Renderer inst;
 	Renderer() {};
 
@@ -29,5 +30,7 @@ public:
 	void Clear();
 	void ClearDepthBuffer();
 	void SetClearColor(float* color);
+	float GetDeltaTime();
+	void SetDeltaTime(float time);
 };
 

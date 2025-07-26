@@ -154,6 +154,18 @@
     <ClCompile Include="Spheree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VertexBuffer.h">
@@ -1137,6 +1149,16 @@
     <ClInclude Include="Spheree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\glm\ext\matrix_clip_space.inl">
@@ -1614,6 +1636,12 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="res\BigSphereSimple.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\Plane.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="res\Collision.shader">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

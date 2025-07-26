@@ -38,6 +38,8 @@
 #include "Spheree.h"
 #include "BigSphere.h"
 #include "GPUInstancing.h"
+#include "Plane.h"
+#include "Collision.h"
 
 SceneManager SceneManager::a;
 Renderer Renderer::inst;
@@ -55,21 +57,24 @@ int main() {
 	SceneManager& gSceneManager=SceneManager::GetManager();
 
 	float color[4] = { 0.45f, 0.55f, 0.60f, 1.00f };
-	const int TotalScenes = 15;
+	const int TotalScenes = 17;
 	char SceneNames[TotalScenes][32] = { "Rainbow Square", "Model View Projection", "Chaos Game",
 	"ShaderAssignment","TextureAssignment","TransformAssignment","ColorfulSerpenski","CoordinateAssignment",
-	"CameraAssignment","LightingAssignment","LightingMaps","GPU Instancing","Sphere - Geometry Shader","Single Sphere","Million Sphere"};
+	"CameraAssignment","LightingAssignment","LightingMaps","GPU Instancing","Sphere - Geometry Shader","Single Sphere",
+		"Million Sphere","Plane","Collision"};
 	gSceneManager.ChangeScene(std::make_unique<CoordinateAssignment>());
-
+	
+	float currentFrame, lastFrame = 0.0f;
 
 	while (!glfwWindowShouldClose(Window))
-	{
+	{	
+		
+
 		gRenderer.SetClearColor(color);
 		gRenderer.Clear();
 
 		static int SceneNo;
 		SceneNo = UpdateImGui(color, SceneNames, TotalScenes);
-
 		gSceneManager.Update();
 
 		if (SceneNo != -1) {
@@ -90,12 +95,18 @@ int main() {
 			case 12: gSceneManager.ChangeScene(std::make_unique<Sphere>()); break;
 			case 13: gSceneManager.ChangeScene(std::make_unique<Spheree>()); break;
 			case 14: gSceneManager.ChangeScene(std::make_unique<BigSphere>()); break;
+			case 15: gSceneManager.ChangeScene(std::make_unique<Plane>()); break;
+			case 16: gSceneManager.ChangeScene(std::make_unique<Collision>()); break;
 			}
 		}
 		/*if(m_leftMouseButton.IsPressed)
 			printf("Mouse Position: %d %d\n", m_leftMouseButton.x, m_leftMouseButton.y);*/
 		glfwSwapBuffers(Window);
 		glfwPollEvents();
+		
+		float currentFrame = glfwGetTime();
+		gRenderer.SetDeltaTime(currentFrame - lastFrame);
+		lastFrame = currentFrame;
 	}
 
 	Close();
