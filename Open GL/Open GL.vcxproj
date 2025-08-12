@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\sharm\source\repos\Open GL\Git\Open GL\res;C:\Softwares\Clibs\glad\include;C:\Softwares\Clibs\glfw-3.4.bin.WIN64\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Softwares\Clibs\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\sharm\source\repos\Open GL\Git\Open GL\res;C:\Softwares\Clibs\glad\include;C:\Softwares\Clibs\glfw-3.4.bin.WIN64\include;C:\Users\sharm\source\repos\assimp-master\build\include;C:\Users\sharm\source\repos\assimp-master\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\sharm\source\repos\assimp-master\build\lib;C:\Softwares\Clibs\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -112,7 +112,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -150,7 +150,9 @@
     <ClCompile Include="LightingAssignment.cpp" />
     <ClCompile Include="LightingMaps.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModelLoading.cpp" />
     <ClCompile Include="ModelViewProjection.cpp" />
+    <ClCompile Include="MyMesh.cpp" />
     <ClCompile Include="Picking_texture.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="RainbowSqaure old.cpp" />
@@ -193,7 +195,9 @@
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="LightingAssignment.h" />
     <ClInclude Include="LightingMaps.h" />
+    <ClInclude Include="ModelLoading.h" />
     <ClInclude Include="ModelViewProjection.h" />
+    <ClInclude Include="MyMesh.h" />
     <ClInclude Include="Picking_technique.h" />
     <ClInclude Include="Picking_Texture.h" />
     <ClInclude Include="Plane.h" />
