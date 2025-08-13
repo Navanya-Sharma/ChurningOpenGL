@@ -40,6 +40,7 @@
 #include "GPUInstancing.h"
 #include "Plane.h"
 #include "Collision.h"
+#include "ModelLoading.h"
 
 SceneManager SceneManager::a;
 Renderer Renderer::inst;
@@ -57,11 +58,11 @@ int main() {
 	SceneManager& gSceneManager=SceneManager::GetManager();
 
 	float color[4] = { 0.45f, 0.55f, 0.60f, 1.00f };
-	const int TotalScenes = 17;
+	const int TotalScenes = 18;
 	char SceneNames[TotalScenes][32] = { "Rainbow Square", "Model View Projection", "Chaos Game",
 	"ShaderAssignment","TextureAssignment","TransformAssignment","ColorfulSerpenski","CoordinateAssignment",
 	"CameraAssignment","LightingAssignment","LightingMaps","GPU Instancing","Sphere - Geometry Shader","Single Sphere",
-		"Million Sphere","Plane","Collision"};
+		"Million Sphere","Plane","Collision","ModelLoading"};
 	gSceneManager.ChangeScene(std::make_unique<CoordinateAssignment>());
 	
 	float currentFrame, lastFrame = 0.0f;
@@ -97,6 +98,7 @@ int main() {
 			case 14: gSceneManager.ChangeScene(std::make_unique<BigSphere>()); break;
 			case 15: gSceneManager.ChangeScene(std::make_unique<Plane>()); break;
 			case 16: gSceneManager.ChangeScene(std::make_unique<Collision>()); break;
+			case 17: gSceneManager.ChangeScene(std::make_unique<ModelLoading>()); break;
 			}
 		}
 		/*if(m_leftMouseButton.IsPressed)

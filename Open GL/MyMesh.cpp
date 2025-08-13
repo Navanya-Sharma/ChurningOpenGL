@@ -1,6 +1,9 @@
-/*#include "MyMesh.h"
+#include "MyMesh.h"
+#include "BufferLayout.h"
+#include "Renderer.h"
 
-MyMesh::MyMesh(vector<vertex> Vert, vector<unsigned int> Ind, vector<picture> Text):
+
+MyMesh::MyMesh(vector<vertex> Vert, vector<unsigned int> Ind, vector<picture> Text) :
 	m_vertArr(), m_vertBuff(NULL, 0 * sizeof(float)),
 	m_indBuff(NULL, 0 * sizeof(unsigned int))
 {
@@ -13,16 +16,44 @@ MyMesh::MyMesh(vector<vertex> Vert, vector<unsigned int> Ind, vector<picture> Te
 
 void MyMesh::Draw(Shader& mShader)
 {
+    int diff = 1;
+    int spec = 2;
+
+    for (int i = 0;i < TextList.size();i++) {
+        std::string name;
+        if (TextList[i].type == "texture_diffuse") {
+            name = std::to_string(diff++);
+        }
+        else {
+            name = std::to_string(spec++);
+        }
+        name = "material." + TextList[i].type + name;
+        mShader.SetUniform1i(name, i);
+    }
+
+    Renderer& gRenderer = Renderer::GetRenderer();
+    gRenderer.Draw(m_vertArr, m_indBuff, mShader);
 
 }
 
 void MyMesh::SetupMesh()
 {
+    m_vertArr.Bind();
 	m_vertBuff.Bind();
-    glBufferSubData(GL_ARRAY_BUFFER, 0, VertList.size() * sizeof(vertex), &VertList[0]);
+    GLCall(glBufferSubData(GL_ARRAY_BUFFER, 0, VertList.size() * sizeof(vertex), &VertList[0]));
+    m_indBuff.Bind();
+    GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, IndList.size() * sizeof(unsigned int), &IndList[0]));
+
+    BufferLayout lay;
+    lay.Push<float>(3);
+    lay.Push<float>(3);
+    lay.Push<float>(2);
+
+    m_vertArr.AddBuffer(m_vertBuff, lay);
+
 
 }
-
+/*
 void MyMesh::SetupMesh()
 {
     // create buffers/arrays

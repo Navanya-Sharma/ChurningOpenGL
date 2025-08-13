@@ -5,20 +5,21 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "VertexArray.h"
-#include "VerError.h"
+
 
 using std::vector;
 
 struct vertex {
 	glm::vec3 Position;
 	glm::vec3 Normal;
-	glm::vec3 TexCords;
+	glm::vec2 TexCords;
 };
 
 struct picture
 {
 	unsigned int id;
 	std::string type;
+	std::string path;
 };
 
 class MyMesh

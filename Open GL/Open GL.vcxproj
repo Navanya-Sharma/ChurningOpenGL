@@ -150,6 +150,7 @@
     <ClCompile Include="LightingAssignment.cpp" />
     <ClCompile Include="LightingMaps.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelLoading.cpp" />
     <ClCompile Include="ModelViewProjection.cpp" />
     <ClCompile Include="MyMesh.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="LightingAssignment.h" />
     <ClInclude Include="LightingMaps.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLoading.h" />
     <ClInclude Include="ModelViewProjection.h" />
     <ClInclude Include="MyMesh.h" />

@@ -22,5 +22,6 @@ public:
 	
 	inline void SetWidth(int w) { m_Width=w; }
 	inline void SetHeight(int h) { m_Height=h; }
+	unsigned int GetId() { return m_RendererID; }
 };
 
