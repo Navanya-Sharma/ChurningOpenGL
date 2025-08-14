@@ -1,17 +1,19 @@
 #pragma once
 #include "Scene.h"
-
+#include "Model.h"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <memory>
 
 
 class ModelLoading : public Scene {
 private:
+	std::unique_ptr<VertexBuffer> m_vertBuff;
 	VertexArray	m_vertArr;
-	VertexBuffer m_vertBuff;
-	IndexBuffer	m_indBuff;
+	std::unique_ptr<IndexBuffer> m_indBuff;
 	Shader	m_shader;
+	Model Backpack;
 
 public:
 	ModelLoading();

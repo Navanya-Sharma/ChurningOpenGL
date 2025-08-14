@@ -1660,6 +1660,9 @@
     <None Include="res\Collision.shader">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="res\ModelLoading.shader">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\glm\CMakeLists.txt">

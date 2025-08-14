@@ -669,6 +669,7 @@
     <None Include="res\LightingGourd.shader" />
     <None Include="res\LightingMapsLightSource.shader" />
     <None Include="res\LightingMapsMain.shader" />
+    <None Include="res\ModelLoading.shader" />
     <None Include="res\MVP.shader" />
     <None Include="res\Plane.shader" />
     <None Include="res\Rainbow.shader" />

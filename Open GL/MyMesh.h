@@ -25,7 +25,7 @@ struct picture
 class MyMesh
 {
 public:
-	vector<vertex> VertList;
+	vector <vertex> VertList;
 	vector <unsigned int > IndList;
 	vector <picture> TextList;
 
@@ -33,8 +33,8 @@ public:
 	void Draw(Shader& mShader);
 private:
 	VertexArray	m_vertArr;
-	VertexBuffer m_vertBuff;
-	IndexBuffer	m_indBuff;
+	std::unique_ptr<VertexBuffer> m_vertBuff;
+	std::unique_ptr<IndexBuffer> m_indBuff;
 
 	void SetupMesh();
 };

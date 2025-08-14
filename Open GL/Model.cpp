@@ -24,13 +24,22 @@ void Model::loadModel(std::string path)
 
 void Model::processNode(aiNode* node, const aiScene* scene)
 {
-    for (int i = 0; i < node->mNumMeshes;i++) {
-        aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        MeshList.push_back(processMesh(mesh, scene));
+    printf("\n processing Node - Meshes %d \n", node->mNumMeshes);
+    
+    for (int j = 0;j < 1;j++) { 
+        printf("Out j %d Meshes %d\n", j, node->mChildren[j]->mNumMeshes);
+        for (int i = 0; i < node->mChildren[j]->mNumMeshes;i++) {
+           // printf("...%d", i);
+            aiMesh* mesh = scene->mMeshes[node->mChildren[j]->mMeshes[i]];
+            MeshList.push_back(processMesh(mesh, scene));
+        }
     }
+    /*printf("\n processing Node Children %d \n", node->mNumChildren);
+
     for (int i = 0;i < node->mNumChildren;i++) {
+        printf("...%d", i);
         processNode(node->mChildren[i], scene);
-    }
+    }*/
 }
 
 MyMesh Model::processMesh(aiMesh* mesh, const aiScene* scene)

@@ -1,11 +1,11 @@
 #include "MyMesh.h"
 #include "BufferLayout.h"
 #include "Renderer.h"
+#include <memory>
 
 
 MyMesh::MyMesh(vector<vertex> Vert, vector<unsigned int> Ind, vector<picture> Text) :
-	m_vertArr(), m_vertBuff(NULL, 0 * sizeof(float)),
-	m_indBuff(NULL, 0 * sizeof(unsigned int))
+	m_vertArr()
 {
 	VertList = Vert;
 	IndList = Ind;
@@ -16,8 +16,8 @@ MyMesh::MyMesh(vector<vertex> Vert, vector<unsigned int> Ind, vector<picture> Te
 
 void MyMesh::Draw(Shader& mShader)
 {
-    int diff = 1;
-    int spec = 2;
+    /*int diff = 1;
+    int spec = 1;
 
     for (int i = 0;i < TextList.size();i++) {
         std::string name;
@@ -29,27 +29,35 @@ void MyMesh::Draw(Shader& mShader)
         }
         name = "material." + TextList[i].type + name;
         mShader.SetUniform1i(name, i);
-    }
-
+    }*/
+    m_vertArr.Bind();
     Renderer& gRenderer = Renderer::GetRenderer();
-    gRenderer.Draw(m_vertArr, m_indBuff, mShader);
+    gRenderer.Draw(m_vertArr, *m_indBuff, mShader);
 
 }
 
 void MyMesh::SetupMesh()
 {
     m_vertArr.Bind();
-	m_vertBuff.Bind();
-    GLCall(glBufferSubData(GL_ARRAY_BUFFER, 0, VertList.size() * sizeof(vertex), &VertList[0]));
-    m_indBuff.Bind();
-    GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, IndList.size() * sizeof(unsigned int), &IndList[0]));
+	//m_vertBuff.Bind();
+    //float vert[6] = {0.0f,0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+    //m_vertBuff.SetData(vert, 6 * sizeof(float));
+
+    m_vertBuff = std::make_unique<VertexBuffer>(&VertList[0], VertList.size() * sizeof(vertex));
+    //std::cout << m_vertBuff->GetID() << std::endl;
+    
+    //m_vertBuff->Bind();
+   // GLCall(glBufferData(GL_ARRAY_BUFFER, 0, VertList.size()*sizeof(vertex), &VertList[0]));
+    m_indBuff = std::make_unique<IndexBuffer>(&IndList[0], IndList.size());
+    //GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, IndList.size() * sizeof(unsigned int), &IndList[0]));
 
     BufferLayout lay;
     lay.Push<float>(3);
     lay.Push<float>(3);
     lay.Push<float>(2);
 
-    m_vertArr.AddBuffer(m_vertBuff, lay);
+    m_vertArr.AddBuffer(*m_vertBuff, lay);
+    m_vertArr.Bind();
 
 
 }
