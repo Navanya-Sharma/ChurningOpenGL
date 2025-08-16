@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Renderer.h"
+#include <iostream>
 
 class Texture
 {
@@ -10,6 +11,7 @@ private:
 	unsigned char* m_LocalBuffer;
 	int m_Width, m_Height, m_BPP;
 public:
+	std :: string type;
 	Texture(const std::string& path, int b=0);
 	~Texture();
 

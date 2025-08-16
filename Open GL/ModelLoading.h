@@ -6,6 +6,7 @@
 #include <assimp/postprocess.h>
 #include <memory>
 
+#include "MyMesh.h"
 
 class ModelLoading : public Scene {
 private:
@@ -13,7 +14,8 @@ private:
 	VertexArray	m_vertArr;
 	std::unique_ptr<IndexBuffer> m_indBuff;
 	Shader	m_shader;
-	Model Backpack;
+	std::unique_ptr<MyMesh> krish;
+	//Model Backpack;
 
 public:
 	ModelLoading();

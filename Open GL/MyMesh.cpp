@@ -4,13 +4,15 @@
 #include <memory>
 
 
-MyMesh::MyMesh(vector<vertex> Vert, vector<unsigned int> Ind, vector<picture> Text) :
-	m_vertArr()
+MyMesh::MyMesh(vector<vertex> Vert, vector<unsigned int> Ind, vector <Texture> Text)
 {
 	VertList = Vert;
 	IndList = Ind;
-	TextList = Text;
-
+	//TextList = Text;
+    Texture a("res/emoji.png");
+    TextList.push_back(a);
+    
+    TextList[0].Bind();
 	SetupMesh();
 }
 
@@ -27,10 +29,12 @@ void MyMesh::Draw(Shader& mShader)
         else {
             name = std::to_string(spec++);
         }
-        name = "material." + TextList[i].type + name;
+        name = "material" + TextList[i].type + name;
         mShader.SetUniform1i(name, i);
     }*/
-    m_vertArr.Bind();
+    TextList[0].Bind(1);
+    mShader.SetUniform1i("materialtexture_diffuse1", 0);
+   // m_vertArr.Bind();
     Renderer& gRenderer = Renderer::GetRenderer();
     gRenderer.Draw(m_vertArr, *m_indBuff, mShader);
 

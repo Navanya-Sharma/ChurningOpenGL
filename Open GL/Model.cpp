@@ -1,6 +1,6 @@
 #include "Model.h"
 #include "Texture.h"
-
+/*
 void Model::Draw(Shader& shader)
 {
     for (int i = 0;i < MeshList.size();i++)
@@ -39,14 +39,14 @@ void Model::processNode(aiNode* node, const aiScene* scene)
     for (int i = 0;i < node->mNumChildren;i++) {
         printf("...%d", i);
         processNode(node->mChildren[i], scene);
-    }*/
+    }
 }
 
 MyMesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 {
     vector<vertex> aiVert;
     vector<unsigned int> aiInd;
-    vector<picture> aiText;
+    vector<Texture> aiText;
 
     //vertice
     for (int i = 0;i < mesh->mNumVertices;i++) {
@@ -82,7 +82,7 @@ MyMesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 
     }
 
-	return MyMesh(aiVert,aiInd,aiText);
+    return MyMesh(aiVert, aiInd, aiText);
 }
 
 unsigned int Model::TextureFromFile(const char* path, const std::string directory)
@@ -122,4 +122,4 @@ vector<picture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type,
 	return t;
 }
 
-
+*/

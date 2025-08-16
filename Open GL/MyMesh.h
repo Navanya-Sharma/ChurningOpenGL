@@ -27,9 +27,9 @@ class MyMesh
 public:
 	vector <vertex> VertList;
 	vector <unsigned int > IndList;
-	vector <picture> TextList;
+	vector <Texture> TextList;
 
-	MyMesh(vector<vertex> Vert,	vector <unsigned int > Ind,	vector <picture> Text);
+	MyMesh(vector<vertex> Vert,	vector <unsigned int > Ind, vector <Texture> Text);
 	void Draw(Shader& mShader);
 private:
 	VertexArray	m_vertArr;
